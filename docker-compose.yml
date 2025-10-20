@@ -1,5 +1,5 @@
 services:
-  softgar-gateway-service:
+  gateway-service:
     build: .
     working_dir: /app
     volumes:
@@ -9,4 +9,3 @@ services:
       - "3000:3000"
     env_file:
       - .env
-      - example-env
