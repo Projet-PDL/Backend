@@ -124,6 +124,104 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
+  password: 'password',
+  googleAuthId: 'googleAuthId',
+  profilePicture: 'profilePicture',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CVScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProfileInfoScalarFieldEnum = {
+  cvId: 'cvId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  headline: 'headline',
+  professionalSummary: 'professionalSummary',
+  email: 'email',
+  phone: 'phone',
+  street: 'street',
+  city: 'city',
+  postalCode: 'postalCode',
+  region: 'region',
+  country: 'country',
+  websiteUrl: 'websiteUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExperienceScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  title: 'title',
+  company: 'company',
+  location: 'location',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  description: 'description',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SkillScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  skillName: 'skillName',
+  position: 'position',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CertificationScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  name: 'name',
+  issuer: 'issuer',
+  issueDate: 'issueDate',
+  expirationDate: 'expirationDate',
+  credentialUrl: 'credentialUrl',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InterestScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  name: 'name',
+  category: 'category',
+  source: 'source',
+  position: 'position',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LanguageScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  languageName: 'languageName',
+  proficiencyLevel: 'proficiencyLevel',
+  position: 'position',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EducationScalarFieldEnum = {
+  id: 'id',
+  cvId: 'cvId',
+  school: 'school',
+  degree: 'degree',
+  fieldOfStudy: 'fieldOfStudy',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  position: 'position',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -145,7 +243,15 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  CV: 'CV',
+  ProfileInfo: 'ProfileInfo',
+  Experience: 'Experience',
+  Skill: 'Skill',
+  Certification: 'Certification',
+  Interest: 'Interest',
+  Language: 'Language',
+  Education: 'Education'
 };
 
 /**
