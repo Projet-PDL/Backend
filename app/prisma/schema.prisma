@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated"
 }
 
 datasource db {
@@ -8,101 +9,37 @@ datasource db {
 }
 
 model User {
-  id             String   @id
-  name           String?
+  id             String   @id @default(cuid())
   email          String   @unique
-  createdAt      DateTime @default(now())
-  googleAuthId   String?
+  name           String?
   password       String
+  googleAuthId   String?
   profilePicture String?
-  updatedAt      DateTime
-  CV             CV[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  cvs CV[]
 }
 
 model CV {
-  id            Int             @id @default(autoincrement())
-  userId        String
-  title         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime
-  User          User            @relation(fields: [userId], references: [id])
-  Certification Certification[]
-  Education     Education[]
-  Experience    Experience[]
-  Interest      Interest[]
-  Language      Language[]
-  ProfileInfo   ProfileInfo?
-  Skill         Skill[]
-}
+  id        Int        @id @default(autoincrement())
+  userId    String
+  title     String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
-model Certification {
-  id             Int       @id @default(autoincrement())
-  cvId           Int
-  name           String
-  issuer         String?
-  issueDate      DateTime?
-  expirationDate DateTime?
-  credentialUrl  String?
-  position       Int?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime
-  CV             CV        @relation(fields: [cvId], references: [id])
-}
-
-model Education {
-  id           Int       @id @default(autoincrement())
-  cvId         Int
-  school       String?
-  degree       String?
-  fieldOfStudy String?
-  startDate    DateTime?
-  endDate      DateTime?
-  description  String?
-  position     Int?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime
-  CV           CV        @relation(fields: [cvId], references: [id])
-}
-
-model Experience {
-  id          Int       @id @default(autoincrement())
-  cvId        Int
-  title       String?
-  company     String?
-  location    String?
-  startDate   DateTime?
-  endDate     DateTime?
-  isCurrent   Boolean?  @default(false)
-  description String?
-  position    Int?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime
-  CV          CV        @relation(fields: [cvId], references: [id])
-}
-
-model Interest {
-  id        Int      @id @default(autoincrement())
-  cvId      Int
-  name      String
-  category  String?
-  source    String?
-  position  Int?
-  createdAt DateTime @default(now())
-  CV        CV       @relation(fields: [cvId], references: [id])
-}
-
-model Language {
-  id               Int      @id @default(autoincrement())
-  cvId             Int
-  languageName     String
-  proficiencyLevel String?
-  position         Int?
-  createdAt        DateTime @default(now())
-  CV               CV       @relation(fields: [cvId], references: [id])
+  user           User           @relation(fields: [userId], references: [id])
+  profileInfo    ProfileInfo?
+  experiences    Experience[]
+  skills         Skill[]
+  certifications Certification[]
+  interests      Interest[]
+  languages      Language[]
+  educations     Education[]
 }
 
 model ProfileInfo {
-  cvId                Int      @id
+  cvId                Int     @id
   firstName           String?
   lastName            String?
   headline            String?
@@ -116,8 +53,26 @@ model ProfileInfo {
   country             String?
   websiteUrl          String?
   createdAt           DateTime @default(now())
-  updatedAt           DateTime
-  CV                  CV       @relation(fields: [cvId], references: [id])
+  updatedAt           DateTime @updatedAt
+
+  cv CV @relation(fields: [cvId], references: [id])
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  cvId        Int
+  title       String?
+  company     String?
+  location    String?
+  startDate   DateTime?
+  endDate     DateTime?
+  isCurrent   Boolean? @default(false)
+  description String?
+  position    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cv CV @relation(fields: [cvId], references: [id])
 }
 
 model Skill {
@@ -126,5 +81,61 @@ model Skill {
   skillName String
   position  Int?
   createdAt DateTime @default(now())
-  CV        CV       @relation(fields: [cvId], references: [id])
+
+  cv CV @relation(fields: [cvId], references: [id])
+}
+
+model Certification {
+  id            Int      @id @default(autoincrement())
+  cvId          Int
+  name          String
+  issuer        String?
+  issueDate     DateTime?
+  expirationDate DateTime?
+  credentialUrl String?
+  position      Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  cv CV @relation(fields: [cvId], references: [id])
+}
+
+model Interest {
+  id        Int      @id @default(autoincrement())
+  cvId      Int
+  name      String
+  category  String?
+  source    String?
+  position  Int?
+  createdAt DateTime @default(now())
+
+  cv CV @relation(fields: [cvId], references: [id])
+}
+
+model Language {
+  id              Int      @id @default(autoincrement())
+  cvId            Int
+  languageName    String
+  proficiencyLevel String?
+  position        Int?
+  createdAt       DateTime @default(now())
+
+  cv CV @relation(fields: [cvId], references: [id])
+}
+
+
+model Education {
+  id          Int      @id @default(autoincrement())
+  cvId        Int
+  school      String?
+  degree      String?
+  fieldOfStudy String?
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
+  position    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cv CV @relation(fields: [cvId], references: [id])
 }
