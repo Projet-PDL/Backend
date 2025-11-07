@@ -8,8 +8,123 @@ datasource db {
 }
 
 model User {
+  id             String   @id
+  name           String?
+  email          String   @unique
+  createdAt      DateTime @default(now())
+  googleAuthId   String?
+  password       String
+  profilePicture String?
+  updatedAt      DateTime
+  CV             CV[]
+}
+
+model CV {
+  id            Int             @id @default(autoincrement())
+  userId        String
+  title         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  User          User            @relation(fields: [userId], references: [id])
+  Certification Certification[]
+  Education     Education[]
+  Experience    Experience[]
+  Interest      Interest[]
+  Language      Language[]
+  ProfileInfo   ProfileInfo?
+  Skill         Skill[]
+}
+
+model Certification {
+  id             Int       @id @default(autoincrement())
+  cvId           Int
+  name           String
+  issuer         String?
+  issueDate      DateTime?
+  expirationDate DateTime?
+  credentialUrl  String?
+  position       Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  CV             CV        @relation(fields: [cvId], references: [id])
+}
+
+model Education {
+  id           Int       @id @default(autoincrement())
+  cvId         Int
+  school       String?
+  degree       String?
+  fieldOfStudy String?
+  startDate    DateTime?
+  endDate      DateTime?
+  description  String?
+  position     Int?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime
+  CV           CV        @relation(fields: [cvId], references: [id])
+}
+
+model Experience {
+  id          Int       @id @default(autoincrement())
+  cvId        Int
+  title       String?
+  company     String?
+  location    String?
+  startDate   DateTime?
+  endDate     DateTime?
+  isCurrent   Boolean?  @default(false)
+  description String?
+  position    Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  CV          CV        @relation(fields: [cvId], references: [id])
+}
+
+model Interest {
   id        Int      @id @default(autoincrement())
+  cvId      Int
   name      String
-  email     String   @unique
+  category  String?
+  source    String?
+  position  Int?
   createdAt DateTime @default(now())
+  CV        CV       @relation(fields: [cvId], references: [id])
+}
+
+model Language {
+  id               Int      @id @default(autoincrement())
+  cvId             Int
+  languageName     String
+  proficiencyLevel String?
+  position         Int?
+  createdAt        DateTime @default(now())
+  CV               CV       @relation(fields: [cvId], references: [id])
+}
+
+model ProfileInfo {
+  cvId                Int      @id
+  firstName           String?
+  lastName            String?
+  headline            String?
+  professionalSummary String?
+  email               String?
+  phone               String?
+  street              String?
+  city                String?
+  postalCode          String?
+  region              String?
+  country             String?
+  websiteUrl          String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime
+  CV                  CV       @relation(fields: [cvId], references: [id])
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  cvId      Int
+  skillName String
+  position  Int?
+  createdAt DateTime @default(now())
+  CV        CV       @relation(fields: [cvId], references: [id])
 }
