@@ -1,6 +1,6 @@
 
 import exampleRoutes from './example.routes';
-import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import authRoutes from "./auth/auth.router"
 import cvRoutes from "./cv/cv.router";
 import languageRoutes from './language/language.router';
