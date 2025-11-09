@@ -2,10 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import * as cvCertification from '../services/certificationService';
 
 type CvParams = { cvId: number };
-type CvEduParams = { cvId: number; eduId: number };
-type CvLangParams = { cvId: number; langId: number };
 type CvCertParams = { cvId: number; certId: number };
-type CvSkillParams = { cvId: number; skillId: number };
 
 export async function addCertification(req: FastifyRequest<{ Params: CvParams }>, reply: FastifyReply) {
     try {
