@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client/edge';
+import { PrismaClient } from "../prisma/generated";
 import { withAccelerate } from '@prisma/extension-accelerate';
 import dotenv from 'dotenv';
 import logger from '../utils/logger/logger';

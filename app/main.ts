@@ -45,7 +45,7 @@ async function startServer() {
   await checkDatabaseConnection();
   
   // 1. Register middlewares
-  registerMiddlewares(fastify);
+  await registerMiddlewares(fastify);
 
 
   // 2. Register Swagger plugin (generates the OpenAPI JSON/YAML endpoints)
