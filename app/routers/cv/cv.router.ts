@@ -8,10 +8,9 @@ import interestRoutes from "../interest/interest.router";
 import profileInfoRoutes from "../profile/profileInfo.router";
 import languageRoutes from "../language/language.router";
 import experienceRoutes from "../experience/experience.route";
-import {requireAuth} from "../../middlewares/requireAuth";
 
 const cvRoutes = async (fastify: FastifyInstance) => {
-    fastify.addHook('preHandler', requireAuth);
+    //fastify.addHook('preHandler', requireAuth);
 
     fastify.get('/', { schema: listSchema }, ctrl.listMyCvs);
     fastify.post('/', { schema: createSchema }, ctrl.createCv);
