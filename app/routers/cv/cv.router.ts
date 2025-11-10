@@ -5,6 +5,7 @@ import educationRoutes from "../education/education.router";
 import skillRoutes from "../skill/skill.router";
 import certificationRoutes from "../certification/certification.router";
 import interestRoutes from "../interest/interest.router";
+import profileInfoRoutes from "../profile/profileInfo.router";
 
 const cvRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
@@ -18,6 +19,7 @@ const cvRoutes = async (fastify: FastifyInstance) => {
     fastify.register(skillRoutes, { prefix: '/:cvId/skill' });
     fastify.register(certificationRoutes, { prefix: '/:cvId/certification' });
     fastify.register(interestRoutes, { prefix: '/:cvId/interest' });
+    fastify.register(profileInfoRoutes, { prefix: '/:cvId/profile-info' });
 };
 
 export default cvRoutes;
