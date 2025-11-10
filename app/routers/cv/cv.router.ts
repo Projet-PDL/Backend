@@ -6,9 +6,12 @@ import skillRoutes from "../skill/skill.router";
 import certificationRoutes from "../certification/certification.router";
 import interestRoutes from "../interest/interest.router";
 import profileInfoRoutes from "../profile/profileInfo.router";
+import languageRoutes from "../language/language.router";
+import experienceRoutes from "../experience/experience.route";
+import {requireAuth} from "../../middlewares/requireAuth";
 
 const cvRoutes = async (fastify: FastifyInstance) => {
-    //fastify.addHook('preHandler', requireAuth);
+    fastify.addHook('preHandler', requireAuth);
 
     fastify.get('/', { schema: listSchema }, ctrl.listMyCvs);
     fastify.post('/', { schema: createSchema }, ctrl.createCv);
@@ -20,6 +23,8 @@ const cvRoutes = async (fastify: FastifyInstance) => {
     fastify.register(certificationRoutes, { prefix: '/:cvId/certification' });
     fastify.register(interestRoutes, { prefix: '/:cvId/interest' });
     fastify.register(profileInfoRoutes, { prefix: '/:cvId/profile-info' });
+    fastify.register(languageRoutes, {prefix : '/:cvId/language' });
+    fastify.register(experienceRoutes, { prefix: '/:cvId/experience' });
 };
 
 export default cvRoutes;
