@@ -3,6 +3,8 @@ import * as ctrl from '../../handlers/cvHandler';
 import { listSchema, createSchema, getByIdSchema, deleteSchema } from './cv.schema';
 import educationRoutes from "../education/education.router";
 import skillRoutes from "../skill/skill.router";
+import certificationRoutes from "../certification/certification.router";
+import interestRoutes from "../interest/interest.router";
 
 const cvRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
@@ -14,6 +16,8 @@ const cvRoutes = async (fastify: FastifyInstance) => {
 
     fastify.register(educationRoutes, { prefix: '/:cvId/education' });
     fastify.register(skillRoutes, { prefix: '/:cvId/skill' });
+    fastify.register(certificationRoutes, { prefix: '/:cvId/certification' });
+    fastify.register(interestRoutes, { prefix: '/:cvId/interest' });
 };
 
 export default cvRoutes;
