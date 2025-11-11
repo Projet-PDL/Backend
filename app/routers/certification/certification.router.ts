@@ -5,9 +5,9 @@ import {addCertificationSchema, deleteCertificationSchema, updateCertificationSc
 const certificationRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.post('/', { schema: addCertificationSchema }, ctrl.addCertification);
-    fastify.put('/:certId', { schema: updateCertificationSchema }, ctrl.updateCertification);
-    fastify.delete('/:certId', { schema: deleteCertificationSchema }, ctrl.deleteCertification);
+    fastify.post('/', { schema: { ...addCertificationSchema, tags: ['Certification Management'] } }, ctrl.addCertification);
+    fastify.put('/:certId', { schema: { ...updateCertificationSchema, tags: ['Certification Management'] } }, ctrl.updateCertification);
+    fastify.delete('/:certId', { schema: { ...deleteCertificationSchema, tags: ['Certification Management'] } }, ctrl.deleteCertification);
 
 };
 

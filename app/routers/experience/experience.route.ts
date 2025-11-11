@@ -11,11 +11,11 @@ import {
 const experienceRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.get('/', { schema: listExperiencesSchema }, ctrl.listExperiences);
-    fastify.post('/', { schema: createExperienceSchema }, ctrl.createExperience);
-    fastify.get('/:experienceId', { schema: getExperienceByIdSchema }, ctrl.getExperienceById);
-    fastify.put('/:experienceId', { schema: updateExperienceSchema }, ctrl.updateExperience);
-    fastify.delete('/:experienceId', { schema: deleteExperienceSchema }, ctrl.deleteExperience);
+    fastify.get('/', { schema: { ...listExperiencesSchema, tags: ['Experience Management'] } }, ctrl.listExperiences);
+    fastify.post('/', { schema: { ...createExperienceSchema, tags: ['Experience Management'] } }, ctrl.createExperience);
+    fastify.get('/:experienceId', { schema: { ...getExperienceByIdSchema, tags: ['Experience Management'] } }, ctrl.getExperienceById);
+    fastify.put('/:experienceId', { schema: { ...updateExperienceSchema, tags: ['Experience Management'] } }, ctrl.updateExperience);
+    fastify.delete('/:experienceId', { schema: { ...deleteExperienceSchema, tags: ['Experience Management'] } }, ctrl.deleteExperience);
 };
 
 export default experienceRoutes;

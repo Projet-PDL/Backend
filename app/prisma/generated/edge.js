@@ -236,7 +236,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/soapiane/Desktop/linkedin2cv/Backend/app/prisma/generated",
+      "value": "C:\\Users\\HP\\Desktop\\ProjetPDL\\Backend\\app\\prisma\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -245,17 +245,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/soapiane/Desktop/linkedin2cv/Backend/app/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\HP\\Desktop\\ProjetPDL\\Backend\\app\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
-    "schemaEnvPath": "../.env"
+    "rootEnvPath": null
   },
   "relativePath": "..",
   "clientVersion": "6.14.0",

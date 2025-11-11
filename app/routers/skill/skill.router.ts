@@ -5,8 +5,8 @@ import {addSkillsSchema, deleteSkillSchema} from "./skill.schema";
 const skillRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.post('/', { schema: addSkillsSchema }, ctrl.addSkills);
-    fastify.delete('/:skillId', { schema: deleteSkillSchema }, ctrl.deleteSkill);
+    fastify.post('/', { schema: { ...addSkillsSchema, tags: ['Skill Management'] } }, ctrl.addSkills);
+    fastify.delete('/:skillId', { schema: { ...deleteSkillSchema, tags: ['Skill Management'] } }, ctrl.deleteSkill);
 };
 
 export default skillRoutes;

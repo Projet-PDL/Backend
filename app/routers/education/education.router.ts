@@ -5,9 +5,9 @@ import {addEducationSchema, deleteEducationSchema, updateEducationSchema} from "
 const educationRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.post('/', { schema: addEducationSchema }, ctrl.addEducation);
-    fastify.put('/:eduId', { schema: updateEducationSchema }, ctrl.updateEducation);
-    fastify.delete('/:eduId', { schema: deleteEducationSchema }, ctrl.deleteEducation);
+    fastify.post('/', { schema: { ...addEducationSchema, tags: ['Education Management'] } }, ctrl.addEducation);
+    fastify.put('/:eduId', { schema: { ...updateEducationSchema, tags: ['Education Management'] } }, ctrl.updateEducation);
+    fastify.delete('/:eduId', { schema: { ...deleteEducationSchema, tags: ['Education Management'] } }, ctrl.deleteEducation);
 };
 
 export default educationRoutes;
