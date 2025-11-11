@@ -1,6 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { authService } from '../services/authService';
-import prisma from '../services/prismaService';
 import { generateToken } from '../services/jwtService';
 
 interface LoginRequest {
@@ -24,28 +23,6 @@ export const login = async (
     success: true,
     data: { token, user },
   });
-};
-
-export const verifyToken = async (
-  request: FastifyRequest<{ Headers: { authorization: string } }>,
-  reply: FastifyReply
-) => {
-  const raw = (request.headers.authorization || '').trim();
-  if (!raw) {
-    return reply.code(401).send({ success: false, message: 'Authorization header missing' });
-  }
-  const token = raw.startsWith('Bearer ') || raw.startsWith('bearer ') ? raw.split(' ')[1].trim() : raw;
-  const decodedToken = await authService.verifyToken(token);
-  if (!decodedToken) {
-    return reply.code(401).send({
-      success: false,
-      message: 'Invalid token',
-    });
-  }
-  return reply.code(200).send({
-    success: true,
-    data: decodedToken,
-  });  
 };
 
 export const register = async (

@@ -25,22 +25,6 @@ export const loginSchema = {
     ...CommonErrorResponses,
   }
 };
-
-export const verifyTokenSchema = {
-  headers: Type.Object({
-    authorization: Type.Optional(Type.String())
-  }, { additionalProperties: false }),
-  response: {
-    200: Type.Object({
-      success: Type.Literal(true),
-      data: Type.Object({
-        userId: Type.String(),
-      })
-    }),
-    ...CommonErrorResponses,
-  },
-};
-
 export const registerSchema = {
   body: Type.Object({
     email: Type.String({ format: 'email' }),
