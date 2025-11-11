@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 const ParamsCvId = Type.Object({
     cvId: Type.Integer(),
@@ -11,8 +12,10 @@ const ParamsCvAndId = (name: string) =>
         [name]: Type.Integer(),
     });
 
+
 export const addCertificationSchema = {
     params: ParamsCvId,
+    headers: BearerAuthHeader,
     body: Type.Object({
         name: Type.String(),
         issuer: Type.Optional(Type.String()),
@@ -29,6 +32,7 @@ export const addCertificationSchema = {
 
 export const updateCertificationSchema = {
     params: ParamsCvAndId('certId'),
+    headers: BearerAuthHeader,
     body: Type.Partial(Type.Object({
         name: Type.String(),
         issuer: Type.String(),
@@ -45,5 +49,6 @@ export const updateCertificationSchema = {
 
 export const deleteCertificationSchema = {
     params: ParamsCvAndId('certId'),
+    headers: BearerAuthHeader,
     response: { 204: Type.Null(), ...CommonErrorResponses },
 };

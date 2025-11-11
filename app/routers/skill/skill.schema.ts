@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 const ParamsCvId = Type.Object({
     cvId: Type.Integer(),
@@ -13,6 +14,7 @@ const ParamsCvAndId = (name: string) =>
 
 export const addSkillsSchema = {
     params: ParamsCvId,
+    headers: BearerAuthHeader,
     body: Type.Object({
         // Supporter soit une string unique, soit une liste d'objets
         items: Type.Union([
@@ -34,5 +36,6 @@ export const addSkillsSchema = {
 
 export const deleteSkillSchema = {
     params: ParamsCvAndId('skillId'),
+    headers: BearerAuthHeader,
     response: { 204: Type.Null(), ...CommonErrorResponses },
 };

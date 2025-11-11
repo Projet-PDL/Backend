@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 const baseProfileInfo = Type.Object({
     firstName: Type.Optional(Type.String()),
@@ -18,6 +19,7 @@ const baseProfileInfo = Type.Object({
 
 export const addProfileInfoSchema = {
     params: Type.Object({ cvId: Type.Integer() }),
+    headers: BearerAuthHeader,
     body: baseProfileInfo,
     response: {
         201: Type.Object({
@@ -30,6 +32,7 @@ export const addProfileInfoSchema = {
 
 export const updateProfileInfoSchema = {
     params: Type.Object({ cvId: Type.Integer() }),
+    headers: BearerAuthHeader,
     body: Type.Partial(baseProfileInfo),
     response: {
         200: Type.Object({
