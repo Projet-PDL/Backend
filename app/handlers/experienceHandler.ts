@@ -29,9 +29,8 @@ export async function listExperiences(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
         const { cvId } = request.params;
-        const experiences = await service.listByCv(userId, cvId);
+        const experiences = await service.listByCv(cvId);
         return reply.code(200).send({ success: true, data: experiences });
     } catch (error: any) {
         console.error('[listExperiences] Error:', error);
@@ -47,10 +46,9 @@ export async function createExperience(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
         const { cvId } = request.params;
         const data = request.body;
-        const experience = await service.create(userId, cvId, data);
+        const experience = await service.create(cvId, data);
         return reply.code(201).send({ success: true, data: experience });
     } catch (error: any) {
         console.error('[createExperience] Error:', error);
@@ -66,9 +64,8 @@ export async function getExperienceById(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
         const { cvId, experienceId } = request.params;
-        const experience = await service.getById(userId, cvId, experienceId);
+        const experience = await service.getById(cvId, experienceId);
         return reply.code(200).send({ success: true, data: experience });
     } catch (error: any) {
         console.error('[getExperienceById] Error:', error);
@@ -84,10 +81,9 @@ export async function updateExperience(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
         const { cvId, experienceId } = request.params;
         const data = request.body;
-        const experience = await service.update(userId, cvId, experienceId, data);
+        const experience = await service.update(cvId, experienceId, data);
         return reply.code(200).send({ success: true, data: experience });
     } catch (error: any) {
         console.error('[updateExperience] Error:', error);
@@ -103,9 +99,9 @@ export async function deleteExperience(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+
         const { cvId, experienceId } = request.params;
-        await service.remove(userId, cvId, experienceId);
+        await service.remove(cvId, experienceId);
         return reply.code(204).send();
     } catch (error: any) {
         console.error('[deleteExperience] Error:', error);

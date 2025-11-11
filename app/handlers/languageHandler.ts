@@ -19,9 +19,8 @@ export async function listLanguages(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
-        const { cvId } = request.params;
-        const languages = await service.listByCv(userId, cvId);
+    const { cvId } = request.params;
+    const languages = await service.listByCv(cvId);
         return reply.code(200).send({ success: true, data: languages });
     } catch (error: any) {
         console.error('[listLanguages] Error:', error);
@@ -37,10 +36,9 @@ export async function createLanguage(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
-        const { cvId } = request.params;
-        const data = request.body;
-        const language = await service.create(userId, cvId, data);
+    const { cvId } = request.params;
+    const data = request.body;
+    const language = await service.create(cvId, data);
         return reply.code(201).send({ success: true, data: language });
     } catch (error: any) {
         console.error('[createLanguage] Error:', error);

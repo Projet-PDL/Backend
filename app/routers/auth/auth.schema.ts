@@ -47,6 +47,7 @@ export const registerSchema = {
         id: Type.Number(),
         email: Type.String({ format: 'email' }),
         name: Type.String(),
+        token: Type.String(),
       }),
     }),
     ...CommonErrorResponses,

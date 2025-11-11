@@ -34,7 +34,7 @@ export async function createCv(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { title } = request.body || {};
         const cv = await service.create(userId, { title });
         return reply.code(201).send({ success: true, data: cv });
@@ -52,7 +52,7 @@ export async function getCvById(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { cvId } = request.params;
         const data = await service.getById(userId, cvId);
         return reply.code(200).send({ success: true, data });
@@ -70,7 +70,7 @@ export async function deleteCv(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { cvId } = request.params;
         await service.remove(userId, cvId);
         return reply.code(204).send();

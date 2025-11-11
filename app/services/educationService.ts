@@ -1,17 +1,9 @@
 import prisma from './prismaService';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
 
-export async function addEducation(userId: string, cvId: number, dto: any) {
+
+export async function addEducation(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const created = await prisma.education.create({
             data: {
                 cvId,
@@ -32,9 +24,8 @@ export async function addEducation(userId: string, cvId: number, dto: any) {
     }
 }
 
-export async function updateEducation(userId: string, cvId: number, eduId: number, dto: any) {
+export async function updateEducation(eduId: number, dto: any, p0: any) {
     try {
-        await assertOwnership(userId, cvId);
         const updated = await prisma.education.update({
             where: { id: eduId },
             data: {
@@ -56,9 +47,8 @@ export async function updateEducation(userId: string, cvId: number, eduId: numbe
     }
 }
 
-export async function deleteEducation(userId: string, cvId: number, eduId: number) {
+export async function deleteEducation(eduId: number) {
     try {
-        await assertOwnership(userId, cvId);
         await prisma.education.delete({ where: { id: eduId } });
     } catch (e: any) {
         if (e?.code === 'P2025') { const err: any = new Error('Education not found'); err.statusCode = 404; throw err; }

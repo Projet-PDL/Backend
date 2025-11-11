@@ -12,20 +12,8 @@ type UpdateLanguageData = {
     position?: number;
 };
 
-export async function listByCv(userId: string, cvId: number) {
+export async function listByCv(cvId: number) {
     try {
-        // Vérifier que le CV appartient à l'utilisateur
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const languages = await prisma.language.findMany({
             where: { cvId },
             orderBy: { position: 'asc' },
@@ -45,20 +33,8 @@ export async function listByCv(userId: string, cvId: number) {
     }
 }
 
-export async function create(userId: string, cvId: number, data: CreateLanguageData) {
+export async function create(cvId: number, data: CreateLanguageData) {
     try {
-        // Vérifier que le CV appartient à l'utilisateur
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const language = await prisma.language.create({
             data: {
                 cvId,
@@ -83,14 +59,13 @@ export async function create(userId: string, cvId: number, data: CreateLanguageD
     }
 }
 
-export async function getById(userId: string, cvId: number, languageId: number) {
+export async function getById(cvId: number, languageId: number) {
     try {
         const language = await prisma.language.findFirst({
             where: { id: languageId, cvId },
-            include: { cv: { select: { userId: true } } },
         });
 
-        if (!language || language.cv.userId !== userId) {
+        if (!language) {
             const err: any = new Error('Language not found');
             err.statusCode = 404;
             throw err;

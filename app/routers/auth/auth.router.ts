@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { login, verifyToken } from '../../handlers/authHandler';
+import { login, verifyToken, register } from '../../handlers/authHandler';
 import { loginSchema, registerSchema, verifyTokenSchema } from './auth.schema';
 
 
@@ -11,7 +11,7 @@ const authRoutes = async (fastify: FastifyInstance) => {
   // GET /login/verify-token - Verify JWT token
   fastify.get('/verify-token', { schema: { ...verifyTokenSchema, tags: ['Authentication'] } }, verifyToken);
   // POST /register - Register a new user
-  // fastify.post('/register',{ schema: { ...registerSchema, tags: ['Authentication'] } },  register);
+  fastify.post('/register',{ schema: { ...registerSchema, tags: ['Authentication'] } },  register);
 };
 
 export default authRoutes;

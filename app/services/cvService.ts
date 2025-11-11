@@ -31,7 +31,7 @@ export async function listByUser(userId: string, opts: ListOpts) {
     }
 }
 
-export async function create(userId: string, data: { title?: string }) {
+export async function create(userId: number, data: { title?: string }) {
     try {
         const cv = await prisma.cV.create({
             data: { userId, title: data.title ?? null },
@@ -44,7 +44,7 @@ export async function create(userId: string, data: { title?: string }) {
     }
 }
 
-export async function getById(userId: string, cvId: number) {
+export async function getById(userId: number, cvId: number) {
     try {
         const cv = await prisma.cV.findFirst({
             where: { id: cvId, userId },
@@ -73,7 +73,7 @@ export async function getById(userId: string, cvId: number) {
     }
 }
 
-export async function remove(userId: string, cvId: number) {
+export async function remove(userId: number, cvId: number) {
     try {
         const exist = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
         if (!exist) {

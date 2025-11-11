@@ -22,19 +22,8 @@ type UpdateExperienceData = {
     position?: number;
 };
 
-export async function listByCv(userId: string, cvId: number) {
+export async function listByCv(cvId: number) {
     try {
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const experiences = await prisma.experience.findMany({
             where: { cvId },
             orderBy: { position: 'asc' },
@@ -59,19 +48,8 @@ export async function listByCv(userId: string, cvId: number) {
     }
 }
 
-export async function create(userId: string, cvId: number, data: CreateExperienceData) {
+export async function create(cvId: number, data: CreateExperienceData) {
     try {
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const experience = await prisma.experience.create({
             data: {
                 cvId,
@@ -107,14 +85,13 @@ export async function create(userId: string, cvId: number, data: CreateExperienc
     }
 }
 
-export async function getById(userId: string, cvId: number, experienceId: number) {
+export async function getById(cvId: number, experienceId: number) {
     try {
         const experience = await prisma.experience.findFirst({
             where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
         });
 
-        if (!experience || experience.cv.userId !== userId) {
+        if (!experience) {
             const err: any = new Error('Experience not found');
             err.statusCode = 404;
             throw err;
@@ -141,18 +118,14 @@ export async function getById(userId: string, cvId: number, experienceId: number
 }
 
 export async function update(
-    userId: string,
     cvId: number,
     experienceId: number,
     data: UpdateExperienceData
 ) {
     try {
-        const experience = await prisma.experience.findFirst({
-            where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
-        });
+        const experience = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
-        if (!experience || experience.cv.userId !== userId) {
+        if (!experience) {
             const err: any = new Error('Experience not found');
             err.statusCode = 404;
             throw err;
@@ -193,22 +166,17 @@ export async function update(
     }
 }
 
-export async function remove(userId: string, cvId: number, experienceId: number) {
+export async function remove(cvId: number, experienceId: number) {
     try {
-        const exist = await prisma.experience.findFirst({
-            where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
-        });
+        const exist = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
-        if (!exist || exist.cv.userId !== userId) {
+        if (!exist) {
             const err: any = new Error('Experience not found');
             err.statusCode = 404;
             throw err;
         }
 
-        await prisma.experience.delete({
-            where: { id: experienceId },
-        });
+        await prisma.experience.delete({ where: { id: experienceId } });
     } catch (error: any) {
         console.error('[remove] Prisma error:', error);
         if (error.statusCode) throw error;

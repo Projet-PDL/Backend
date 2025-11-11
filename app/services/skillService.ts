@@ -1,17 +1,7 @@
 import prisma from './prismaService';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
-
-export async function addSkills(userId: string, cvId: number, items: Array<any>) {
+export async function addSkills(cvId: number, items: Array<any>) {
     try {
-        await assertOwnership(userId, cvId);
         // Normaliser : string[] -> { skillName }[]
         const rows = items.map((it: any) =>
             typeof it === 'string' ? { cvId, skillName: it } : { cvId, skillName: it.skillName, position: it.position ?? null }
@@ -25,9 +15,15 @@ export async function addSkills(userId: string, cvId: number, items: Array<any>)
     }
 }
 
-export async function deleteSkill(userId: string, cvId: number, skillId: number) {
+export async function deleteSkill(cvId: number, skillId: number) {
     try {
-        await assertOwnership(userId, cvId);
+        // optionally, ensure the skill belongs to the cvId before deleting
+        const exist = await prisma.skill.findFirst({ where: { id: skillId, cvId } });
+        if (!exist) {
+            const err: any = new Error('Skill not found');
+            err.statusCode = 404;
+            throw err;
+        }
         await prisma.skill.delete({ where: { id: skillId } });
     } catch (e: any) {
         if (e?.code === 'P2025') { const err: any = new Error('Skill not found'); err.statusCode = 404; throw err; }

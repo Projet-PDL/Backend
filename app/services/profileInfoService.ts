@@ -1,17 +1,7 @@
 import prisma from './prismaService';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
-
-export async function addProfileInfo(userId: string, cvId: number, dto: any) {
+export async function addProfileInfo(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const created = await prisma.profileInfo.create({
             data: {
                 cvId,
@@ -42,9 +32,8 @@ export async function addProfileInfo(userId: string, cvId: number, dto: any) {
     }
 }
 
-export async function updateProfileInfo(userId: string, cvId: number, dto: any) {
+export async function updateProfileInfo(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const updated = await prisma.profileInfo.update({
             where: { cvId },
             data: {
