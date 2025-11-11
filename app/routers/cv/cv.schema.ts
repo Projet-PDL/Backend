@@ -1,7 +1,9 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 export const listSchema = {
+    headers: BearerAuthHeader,
     querystring: Type.Object({
         q: Type.Optional(Type.String()),
         updatedAfter: Type.Optional(Type.String({ format: 'date-time' })),
@@ -28,6 +30,7 @@ export const listSchema = {
 };
 
 export const createSchema = {
+    headers: BearerAuthHeader,
     body: Type.Object({
         title: Type.Optional(Type.String()),
     }, { additionalProperties: false }),
@@ -49,6 +52,7 @@ export const getByIdSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         200: Type.Object({
             success: Type.Literal(true),
@@ -124,6 +128,7 @@ export const deleteSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         204: Type.Null(),
         ...CommonErrorResponses,

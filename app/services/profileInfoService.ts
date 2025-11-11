@@ -1,17 +1,8 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, AlreadyExistsError } from '../errors/crud';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
-
-export async function addProfileInfo(userId: string, cvId: number, dto: any) {
+export async function addProfileInfo(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const created = await prisma.profileInfo.create({
             data: {
                 cvId,
@@ -34,17 +25,14 @@ export async function addProfileInfo(userId: string, cvId: number, dto: any) {
     } catch (e: any) {
         console.error('[addProfileInfo]', e);
         if (e?.code === 'P2002') {
-            const err: any = new Error('Profile info already exists for this CV');
-            err.statusCode = 409;
-            throw err;
+            throw new AlreadyExistsError('ProfileInfo', { cvId }, 'profileInfoService.addProfileInfo');
         }
-        throw e;
+        throw new CreationError('ProfileInfo', e, 'profileInfoService.addProfileInfo');
     }
 }
 
-export async function updateProfileInfo(userId: string, cvId: number, dto: any) {
+export async function updateProfileInfo(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const updated = await prisma.profileInfo.update({
             where: { cvId },
             data: {
@@ -66,11 +54,9 @@ export async function updateProfileInfo(userId: string, cvId: number, dto: any) 
         return updated;
     } catch (e: any) {
         if (e?.code === 'P2025') {
-            const err: any = new Error('Profile info not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('ProfileInfo', { cvId }, 'profileInfoService.updateProfileInfo');
         }
         console.error('[updateProfileInfo]', e);
-        throw e;
+        throw new UpdateError('ProfileInfo', e, 'profileInfoService.updateProfileInfo');
     }
 }

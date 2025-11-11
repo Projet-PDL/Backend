@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 type CreateLanguageData = {
     languageName: string;
@@ -12,20 +13,8 @@ type UpdateLanguageData = {
     position?: number;
 };
 
-export async function listByCv(userId: string, cvId: number) {
+export async function listByCv(cvId: number) {
     try {
-        // Vérifier que le CV appartient à l'utilisateur
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const languages = await prisma.language.findMany({
             where: { cvId },
             orderBy: { position: 'asc' },
@@ -41,24 +30,12 @@ export async function listByCv(userId: string, cvId: number) {
     } catch (error: any) {
         console.error('[listByCv] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to list languages');
+        throw new CreationError('Language', error, 'languageService.listByCv');
     }
 }
 
-export async function create(userId: string, cvId: number, data: CreateLanguageData) {
+export async function create(cvId: number, data: CreateLanguageData) {
     try {
-        // Vérifier que le CV appartient à l'utilisateur
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const language = await prisma.language.create({
             data: {
                 cvId,
@@ -78,22 +55,22 @@ export async function create(userId: string, cvId: number, data: CreateLanguageD
         return language;
     } catch (error: any) {
         console.error('[create] Prisma error:', error);
+        if (error?.code === 'P2002') {
+            throw new NotFoundError('Language', { cvId }, 'languageService.create', 'Unique constraint violated');
+        }
         if (error.statusCode) throw error;
-        throw new Error('Failed to create language');
+        throw new CreationError('Language', error, 'languageService.create');
     }
 }
 
-export async function getById(userId: string, cvId: number, languageId: number) {
+export async function getById(cvId: number, languageId: number) {
     try {
         const language = await prisma.language.findFirst({
             where: { id: languageId, cvId },
-            include: { cv: { select: { userId: true } } },
         });
 
-        if (!language || language.cv.userId !== userId) {
-            const err: any = new Error('Language not found');
-            err.statusCode = 404;
-            throw err;
+        if (!language) {
+            throw new NotFoundError('Language', { id: languageId }, 'languageService.getById');
         }
 
         return {
@@ -106,7 +83,7 @@ export async function getById(userId: string, cvId: number, languageId: number) 
     } catch (error: any) {
         console.error('[getById] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to retrieve language');
+        throw new CreationError('Language', error, 'languageService.getById');
     }
 }
 
@@ -136,7 +113,7 @@ export async function update(
     } catch (error: any) {
         console.error('[update] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to update language');
+        throw new UpdateError('Language', error, 'languageService.update');
     }
 }
 
@@ -147,9 +124,7 @@ export async function remove( languageId: number) {
         });
 
         if (!exist ) {
-            const err: any = new Error('Language not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Language', { id: languageId }, 'languageService.remove');
         }
 
         await prisma.language.delete({
@@ -158,6 +133,6 @@ export async function remove( languageId: number) {
     } catch (error: any) {
         console.error('[remove] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to delete language');
+        throw new DeletionError('Language', error, 'languageService.remove');
     }
 }

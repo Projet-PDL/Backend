@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 const ParamsCvId = Type.Object({
     cvId: Type.Integer(),
@@ -7,6 +8,7 @@ const ParamsCvId = Type.Object({
 
 export const addInterestsSchema = {
     params: ParamsCvId,
+    headers: BearerAuthHeader,
     body: Type.Object({
         items: Type.Array(Type.Object({
             name: Type.String(),
@@ -23,6 +25,7 @@ export const addInterestsSchema = {
 
 export const putInterestsSchema = {
     params: ParamsCvId,
+    headers: BearerAuthHeader,
     body: Type.Object({
         items: Type.Array(Type.Object({
             name: Type.String(),

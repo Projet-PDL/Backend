@@ -1,17 +1,8 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
-
-export async function addCertification(userId: string, cvId: number, dto: any) {
+export async function addCertification(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const created = await prisma.certification.create({
             data: {
                 cvId,
@@ -25,15 +16,22 @@ export async function addCertification(userId: string, cvId: number, dto: any) {
             select: { id: true },
         });
         return created.id;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addCertification]', e);
-        throw e;
+        throw new CreationError('Certification', e, 'certificationService.addCertification');
     }
 }
 
-export async function updateCertification(userId: string, cvId: number, certId: number, dto: any) {
+export async function updateCertification(cvId: number, certId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
+        // ensure certification belongs to the given cvId
+        const existing = await prisma.certification.findFirst({ where: { id: certId, cvId } });
+        if (!existing) {
+            const err: any = new Error('Certification not found');
+            err.statusCode = 404;
+            throw err;
+        }
+
         const updated = await prisma.certification.update({
             where: { id: certId },
             data: {
@@ -48,19 +46,28 @@ export async function updateCertification(userId: string, cvId: number, certId: 
         });
         return updated.id;
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Certification not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Certification', { id: certId }, 'certificationService.updateCertification');
+        }
         console.error('[updateCertification]', e);
-        throw e;
+        throw new UpdateError('Certification', e, 'certificationService.updateCertification');
     }
 }
 
-export async function deleteCertification(userId: string, cvId: number, certId: number) {
+export async function deleteCertification(cvId: number, certId: number) {
     try {
-        await assertOwnership(userId, cvId);
+        const existing = await prisma.certification.findFirst({ where: { id: certId, cvId } });
+        if (!existing) {
+            const err: any = new Error('Certification not found');
+            err.statusCode = 404;
+            throw err;
+        }
         await prisma.certification.delete({ where: { id: certId } });
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Certification not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Certification', { id: certId }, 'certificationService.deleteCertification');
+        }
         console.error('[deleteCertification]', e);
-        throw e;
+        throw new DeletionError('Certification', e, 'certificationService.deleteCertification');
     }
 }

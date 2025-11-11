@@ -10,8 +10,8 @@ import {
 const languageRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.get('/:cvId', { schema: { ...listLanguagesSchema, tags: ['Language Management'] } }, ctrl.listLanguages);
-    fastify.post('/:cvId', { schema: { ...createLanguageSchema, tags: ['Language Management'] } }, ctrl.createLanguage);
+    fastify.get('/', { schema: { ...listLanguagesSchema, tags: ['Language Management'] } }, ctrl.listLanguages);
+    fastify.post('/', { schema: { ...createLanguageSchema, tags: ['Language Management'] } }, ctrl.createLanguage);
     fastify.put('/:languageId', { schema: { ...updateLanguageSchema, tags: ['Language Management'] } }, ctrl.updateLanguage);
     fastify.delete('/:languageId', { schema: { ...deleteLanguageSchema, tags: ['Language Management'] } }, ctrl.deleteLanguage);
 };

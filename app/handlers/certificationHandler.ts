@@ -6,8 +6,7 @@ type CvCertParams = { cvId: number; certId: number };
 
 export async function addCertification(req: FastifyRequest<{ Params: CvParams }>, reply: FastifyReply) {
     try {
-        const userId = (req as any).user?.id as string;
-        const id = await cvCertification.addCertification(userId, req.params.cvId, req.body as any);
+        const id = await cvCertification.addCertification(req.params.cvId, req.body as any);
         return reply.code(201).send({ success: true, data: { id } });
     } catch (e: any) {
         console.error('[addCertification]', e);
@@ -17,8 +16,7 @@ export async function addCertification(req: FastifyRequest<{ Params: CvParams }>
 
 export async function updateCertification(req: FastifyRequest<{ Params: CvCertParams }>, reply: FastifyReply) {
     try {
-        const userId = (req as any).user?.id as string;
-        const id = await cvCertification.updateCertification(userId, req.params.cvId, req.params.certId, req.body as any);
+        const id = await cvCertification.updateCertification(req.params.cvId, req.params.certId, req.body as any);
         return reply.code(200).send({ success: true, data: { id } });
     } catch (e: any) {
         console.error('[updateCertification]', e);
@@ -28,8 +26,7 @@ export async function updateCertification(req: FastifyRequest<{ Params: CvCertPa
 
 export async function deleteCertification(req: FastifyRequest<{ Params: CvCertParams }>, reply: FastifyReply) {
     try {
-        const userId = (req as any).user?.id as string;
-        await cvCertification.deleteCertification(userId, req.params.cvId, req.params.certId);
+        await cvCertification.deleteCertification(req.params.cvId, req.params.certId);
         return reply.code(204).send();
     } catch (e: any) {
         console.error('[deleteCertification]', e);

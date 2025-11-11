@@ -1,17 +1,8 @@
 import prisma from './prismaService';
+import { CreationError, UpdateError } from '../errors/crud';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
-
-export async function addInterests(userId: string, cvId: number, items: Array<any>) {
+export async function addInterests(cvId: number, items: Array<any>) {
     try {
-        await assertOwnership(userId, cvId);
         if (!items?.length) return 0;
         const res = await prisma.interest.createMany({
             data: items.map((i) => ({
@@ -23,15 +14,14 @@ export async function addInterests(userId: string, cvId: number, items: Array<an
             })),
         });
         return res.count;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addInterests]', e);
-        throw e;
+        throw new CreationError('Interest', e, 'interestService.addInterests');
     }
 }
 
-export async function putInterests(userId: string, cvId: number, items: Array<any>) {
+export async function putInterests(cvId: number, items: Array<any>) {
     try {
-        await assertOwnership(userId, cvId);
         await prisma.$transaction(async (tx) => {
             await tx.interest.deleteMany({ where: { cvId } });
             if (items?.length) {
@@ -47,8 +37,8 @@ export async function putInterests(userId: string, cvId: number, items: Array<an
             }
         });
         return items?.length ?? 0;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[putInterests]', e);
-        throw e;
+        throw new UpdateError('Interest', e, 'interestService.putInterests');
     }
 }

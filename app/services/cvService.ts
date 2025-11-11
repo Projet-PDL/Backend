@@ -1,4 +1,6 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, DeletionError } from '../errors/crud';
+import { BaseError } from '../errors/BaseError';
 
 type ListOpts = { q?: string; updatedAfter?: string; page: number; size: number };
 
@@ -26,12 +28,14 @@ export async function listByUser(userId: string, opts: ListOpts) {
 
         return { items, page: opts.page, size: opts.size, total };
     } catch (error: any) {
+        if (error instanceof BaseError) throw error;
         console.error('[listByUser] Prisma error:', error);
-        throw new Error('Failed to list CVs');
+        // Listing failures are treated as generic creation error for now to provide context
+        throw new CreationError('CV', error, 'cvService.listByUser');
     }
 }
 
-export async function create(userId: string, data: { title?: string }) {
+export async function create(userId: number, data: { title?: string }) {
     try {
         const cv = await prisma.cV.create({
             data: { userId, title: data.title ?? null },
@@ -39,12 +43,13 @@ export async function create(userId: string, data: { title?: string }) {
         });
         return cv;
     } catch (error: any) {
+        if (error instanceof BaseError) throw error;
         console.error('[create] Prisma error:', error);
-        throw new Error('Failed to create CV');
+        throw new CreationError('CV', error, 'cvService.create');
     }
 }
 
-export async function getById(userId: string, cvId: number) {
+export async function getById(userId: number, cvId: number) {
     try {
         const cv = await prisma.cV.findFirst({
             where: { id: cvId, userId },
@@ -60,26 +65,23 @@ export async function getById(userId: string, cvId: number) {
         });
 
         if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('CV', { id: cvId }, 'cvService.getById');
         }
 
         return cv;
     } catch (error: any) {
+        if (error instanceof BaseError) throw error;
         console.error('[getById] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to retrieve CV');
+        throw new CreationError('CV', error, 'cvService.getById');
     }
 }
 
-export async function remove(userId: string, cvId: number) {
+export async function remove(userId: number, cvId: number) {
     try {
         const exist = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
         if (!exist) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('CV', { id: cvId }, 'cvService.remove');
         }
 
         await prisma.$transaction(async (tx: any) => {
@@ -93,7 +95,8 @@ export async function remove(userId: string, cvId: number) {
             await tx.cV.delete({ where: { id: cvId } });
         });
     } catch (error: any) {
+        if (error instanceof BaseError) throw error;
         console.error('[remove] Prisma error:', error);
-        throw new Error('Failed to delete CV');
+        throw new DeletionError('CV', error, 'cvService.remove');
     }
 }

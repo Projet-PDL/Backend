@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 type CreateExperienceData = {
     title?: string;
@@ -22,19 +23,8 @@ type UpdateExperienceData = {
     position?: number;
 };
 
-export async function listByCv(userId: string, cvId: number) {
+export async function listByCv(cvId: number) {
     try {
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const experiences = await prisma.experience.findMany({
             where: { cvId },
             orderBy: { position: 'asc' },
@@ -55,23 +45,12 @@ export async function listByCv(userId: string, cvId: number) {
     } catch (error: any) {
         console.error('[listByCv] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to list experiences');
+        throw new CreationError('Experience', error, 'experienceService.listByCv');
     }
 }
 
-export async function create(userId: string, cvId: number, data: CreateExperienceData) {
+export async function create(cvId: number, data: CreateExperienceData) {
     try {
-        const cv = await prisma.cV.findFirst({
-            where: { id: cvId, userId },
-            select: { id: true },
-        });
-
-        if (!cv) {
-            const err: any = new Error('CV not found');
-            err.statusCode = 404;
-            throw err;
-        }
-
         const experience = await prisma.experience.create({
             data: {
                 cvId,
@@ -103,21 +82,18 @@ export async function create(userId: string, cvId: number, data: CreateExperienc
     } catch (error: any) {
         console.error('[create] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to create experience');
+        throw new CreationError('Experience', error, 'experienceService.create');
     }
 }
 
-export async function getById(userId: string, cvId: number, experienceId: number) {
+export async function getById(cvId: number, experienceId: number) {
     try {
         const experience = await prisma.experience.findFirst({
             where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
         });
 
-        if (!experience || experience.cv.userId !== userId) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+        if (!experience) {
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.getById');
         }
 
         return {
@@ -136,26 +112,20 @@ export async function getById(userId: string, cvId: number, experienceId: number
     } catch (error: any) {
         console.error('[getById] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to retrieve experience');
+        throw new CreationError('Experience', error, 'experienceService.getById');
     }
 }
 
 export async function update(
-    userId: string,
     cvId: number,
     experienceId: number,
     data: UpdateExperienceData
 ) {
     try {
-        const experience = await prisma.experience.findFirst({
-            where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
-        });
+        const experience = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
-        if (!experience || experience.cv.userId !== userId) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+        if (!experience) {
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.update');
         }
 
         const updated = await prisma.experience.update({
@@ -189,29 +159,22 @@ export async function update(
     } catch (error: any) {
         console.error('[update] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to update experience');
+        throw new UpdateError('Experience', error, 'experienceService.update');
     }
 }
 
-export async function remove(userId: string, cvId: number, experienceId: number) {
+export async function remove(cvId: number, experienceId: number) {
     try {
-        const exist = await prisma.experience.findFirst({
-            where: { id: experienceId, cvId },
-            include: { cv: { select: { userId: true } } },
-        });
+        const exist = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
-        if (!exist || exist.cv.userId !== userId) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+        if (!exist) {
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.remove');
         }
 
-        await prisma.experience.delete({
-            where: { id: experienceId },
-        });
+        await prisma.experience.delete({ where: { id: experienceId } });
     } catch (error: any) {
         console.error('[remove] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to delete experience');
+        throw new DeletionError('Experience', error, 'experienceService.remove');
     }
 }

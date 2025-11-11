@@ -10,9 +10,7 @@ import { TokenVerificationError } from '../errors/auth/TokenVerificationError';
 
 export interface TokenPayload {
   userId: string;
-  role: string;
 }
-
 
 export function generateToken(payload: TokenPayload, expiresIn: number = JWT_EXPIRATION): string {
   try {
@@ -30,7 +28,7 @@ export function verifyToken(token: string): TokenPayload {
   try {
     const decoded = jwt.verify(token, SECRET_KEY) as TokenPayload & JwtPayload;
     logger.info({ token }, 'Token verified successfully');
-    return { userId: decoded.userId, role: decoded.role };
+    return { userId: decoded.userId };
   } catch (error) {
     logger.error({ token, error }, 'Token verification failed');
     throw new TokenVerificationError({ token, error });

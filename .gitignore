@@ -3,4 +3,5 @@ dist/
 *.env
 build/
 app/prisma/generated/
+app/prisma/migrations/
 logs/

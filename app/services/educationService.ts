@@ -1,17 +1,10 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError, AlreadyExistsError } from '../errors/crud';
 
-async function assertOwnership(userId: string, cvId: number) {
-    const owns = await prisma.cV.findFirst({ where: { id: cvId, userId }, select: { id: true } });
-    if (!owns) {
-        const err: any = new Error('CV not found');
-        err.statusCode = 404;
-        throw err;
-    }
-}
 
-export async function addEducation(userId: string, cvId: number, dto: any) {
+
+export async function addEducation(cvId: number, dto: any) {
     try {
-        await assertOwnership(userId, cvId);
         const created = await prisma.education.create({
             data: {
                 cvId,
@@ -26,15 +19,17 @@ export async function addEducation(userId: string, cvId: number, dto: any) {
             select: { id: true },
         });
         return created.id;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addEducation]', e);
-        throw e;
+        if (e?.code === 'P2002') {
+            throw new AlreadyExistsError('Education', null, 'educationService.addEducation');
+        }
+        throw new CreationError('Education', e, 'educationService.addEducation');
     }
 }
 
-export async function updateEducation(userId: string, cvId: number, eduId: number, dto: any) {
+export async function updateEducation(eduId: number, dto: any, p0: any) {
     try {
-        await assertOwnership(userId, cvId);
         const updated = await prisma.education.update({
             where: { id: eduId },
             data: {
@@ -50,19 +45,22 @@ export async function updateEducation(userId: string, cvId: number, eduId: numbe
         });
         return updated.id;
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Education not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Education', { id: eduId }, 'educationService.updateEducation');
+        }
         console.error('[updateEducation]', e);
-        throw e;
+        throw new UpdateError('Education', e, 'educationService.updateEducation');
     }
 }
 
-export async function deleteEducation(userId: string, cvId: number, eduId: number) {
+export async function deleteEducation(eduId: number) {
     try {
-        await assertOwnership(userId, cvId);
         await prisma.education.delete({ where: { id: eduId } });
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Education not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Education', { id: eduId }, 'educationService.deleteEducation');
+        }
         console.error('[deleteEducation]', e);
-        throw e;
+        throw new DeletionError('Education', e, 'educationService.deleteEducation');
     }
 }

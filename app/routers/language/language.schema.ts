@@ -1,10 +1,12 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 export const listLanguagesSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         200: Type.Object({
             success: Type.Literal(true),
@@ -23,6 +25,7 @@ export const createLanguageSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     body: Type.Object({
         languageName: Type.String(),
         proficiencyLevel: Type.Optional(Type.String()),
@@ -47,6 +50,7 @@ export const updateLanguageSchema = {
     params: Type.Object({
         languageId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     body: Type.Object({
         languageName: Type.Optional(Type.String()),
         proficiencyLevel: Type.Optional(Type.String()),
@@ -71,6 +75,7 @@ export const deleteLanguageSchema = {
     params: Type.Object({
         languageId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         204: Type.Null(),
         ...CommonErrorResponses,

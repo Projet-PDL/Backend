@@ -1,10 +1,12 @@
 import { Type } from '@sinclair/typebox';
 import { CommonErrorResponses } from '../baseSchema';
+import { BearerAuthHeader } from '../baseHeaders';
 
 export const listExperiencesSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         200: Type.Object({
             success: Type.Literal(true),
@@ -28,6 +30,7 @@ export const createExperienceSchema = {
     params: Type.Object({
         cvId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     body: Type.Object({
         title: Type.Optional(Type.String()),
         company: Type.Optional(Type.String()),
@@ -64,6 +67,7 @@ export const getExperienceByIdSchema = {
         cvId: Type.Integer(),
         experienceId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         200: Type.Object({
             success: Type.Literal(true),
@@ -90,6 +94,7 @@ export const updateExperienceSchema = {
         cvId: Type.Integer(),
         experienceId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     body: Type.Object({
         title: Type.Optional(Type.String()),
         company: Type.Optional(Type.String()),
@@ -126,6 +131,7 @@ export const deleteExperienceSchema = {
         cvId: Type.Integer(),
         experienceId: Type.Integer(),
     }),
+    headers: BearerAuthHeader,
     response: {
         204: Type.Null(),
         ...CommonErrorResponses,
