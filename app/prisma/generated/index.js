@@ -237,7 +237,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/soapiane/Desktop/linkedin2cv/Backend/app/prisma/generated",
+      "value": "C:\\Users\\HP\\Desktop\\ProjetPDL\\Backend\\app\\prisma\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -246,17 +246,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/soapiane/Desktop/linkedin2cv/Backend/app/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\HP\\Desktop\\ProjetPDL\\Backend\\app\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
-    "schemaEnvPath": "../.env"
+    "rootEnvPath": null
   },
   "relativePath": "..",
   "clientVersion": "6.14.0",
@@ -314,8 +313,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
-path.join(process.cwd(), "generated/libquery_engine-debian-openssl-3.0.x.so.node")
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "generated/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/schema.prisma")

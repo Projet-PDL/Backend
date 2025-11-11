@@ -12,17 +12,40 @@ import experienceRoutes from "../experience/experience.route";
 const cvRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.get('/', { schema: listSchema }, ctrl.listMyCvs);
-    fastify.post('/', { schema: createSchema }, ctrl.createCv);
-    fastify.get('/:cvId', { schema: getByIdSchema }, ctrl.getCvById);
-    fastify.delete('/:cvId', { schema: deleteSchema }, ctrl.deleteCv);
+    fastify.get('/', { 
+        schema: { 
+            ...listSchema, 
+            tags: ['CV Management'] 
+        } 
+    }, ctrl.listMyCvs);
+    
+    fastify.post('/', { 
+        schema: { 
+            ...createSchema, 
+            tags: ['CV Management'] 
+        } 
+    }, ctrl.createCv);
+    
+    fastify.get('/:cvId', { 
+        schema: { 
+            ...getByIdSchema, 
+            tags: ['CV Management'] 
+        } 
+    }, ctrl.getCvById);
+    
+    fastify.delete('/:cvId', { 
+        schema: { 
+            ...deleteSchema, 
+            tags: ['CV Management'] 
+        } 
+    }, ctrl.deleteCv);
 
     fastify.register(educationRoutes, { prefix: '/:cvId/education' });
     fastify.register(skillRoutes, { prefix: '/:cvId/skill' });
     fastify.register(certificationRoutes, { prefix: '/:cvId/certification' });
     fastify.register(interestRoutes, { prefix: '/:cvId/interest' });
     fastify.register(profileInfoRoutes, { prefix: '/:cvId/profile-info' });
-    fastify.register(languageRoutes, {prefix : '/:cvId/language' });
+    fastify.register(languageRoutes, { prefix: '/:cvId/language' });
     fastify.register(experienceRoutes, { prefix: '/:cvId/experience' });
 };
 

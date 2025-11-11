@@ -5,8 +5,8 @@ import { addProfileInfoSchema, updateProfileInfoSchema } from './profileInfo.sch
 const profileInfoRoutes = async (fastify: FastifyInstance) => {
     //fastify.addHook('preHandler', requireAuth);
 
-    fastify.post('/', { schema: addProfileInfoSchema }, ctrl.addProfileInfo);
-    fastify.put('/', { schema: updateProfileInfoSchema }, ctrl.updateProfileInfo);
+    fastify.post('/', { schema: { ...addProfileInfoSchema, tags: ['Profile Information Management'] } }, ctrl.addProfileInfo);
+    fastify.put('/', { schema: { ...updateProfileInfoSchema, tags: ['Profile Information Management'] } }, ctrl.updateProfileInfo);
 };
 
 export default profileInfoRoutes;
