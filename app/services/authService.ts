@@ -10,17 +10,16 @@ import { TokenVerificationError } from '../errors/auth/TokenVerificationError';
 
 
 export const authService = {
-  async login(email: string, password: string, role: string): Promise<{ token: string; user: any }> {
-    logger.info({ email, role }, 'Login attempt started');
+  async login(email: string, password: string): Promise<{ token: string; user: any }> {
+    logger.info({ email }, 'Login attempt started');
 
     const user: any = await prisma.user.findUnique({
       where: { email },
     });
 
     if (!user) {
-      throw new UserNotFoundError(email, role);
+      throw new UserNotFoundError(email);
     }
-
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
@@ -28,16 +27,16 @@ export const authService = {
     }
 
     try {
-      const token = generateToken({ userId: String(user.id), role });
-      logger.info({ email, role, userId: user.id }, 'Token generated successfully');
+      const token = generateToken({ userId: String(user.id) });
+      logger.info({ email, userId: user.id }, 'Token generated successfully');
       // Return token and minimal user account info
-      return { token, user: { id: user.id, email: user.email, name: user.name, role } };
+      return { token, user: { id: user.id, email: user.email, name: user.name } };
     } catch (err) {
       throw new TokenGenerationError(err);
     }
   },
 
-  async verifyToken(token: string): Promise<{ userId: string; role: string }> {
+  async verifyToken(token: string): Promise<{ userId: string }> {
     try {
       const decodedToken = verifyToken(token);
       if (!decodedToken) {

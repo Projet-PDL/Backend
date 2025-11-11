@@ -13,12 +13,16 @@ export async function requireAuth(request: FastifyRequest, reply: FastifyReply) 
   try {
     const decoded = await authService.authService.verifyToken(token);
     if (!decoded) {
-      return reply.code(401).send({
-        success: false,
-        message: 'Invalid token',
-      });
+      return reply.code(401).send({ success: false, message: 'Invalid token' });
     }
-    (request as any).user = decoded;
+
+    // Normalize request.user to contain an `id` property. Tokens carry only userId.
+    // Convert numeric userId strings to numbers so downstream handlers expecting numeric ids work.
+    let parsedId: string | number = decoded.userId;
+    if (typeof decoded.userId === 'string' && /^[0-9]+$/.test(decoded.userId)) {
+      parsedId = Number(decoded.userId);
+    }
+    (request as any).user = { id: parsedId };
   } catch (err) {
     // Do not leak internal error details; return 401 for invalid tokens
     return reply.code(401).send({ success: false, message: 'Invalid token' });

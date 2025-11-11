@@ -19,7 +19,6 @@ export const loginSchema = {
           id: Type.Number(),
           email: Type.String({ format: 'email' }),
           name: Type.String(),
-          role: Type.Optional(Type.String()),
         })
       })
     }),

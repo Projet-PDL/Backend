@@ -6,7 +6,6 @@ import { generateToken } from '../services/jwtService';
 interface LoginRequest {
   email: string;
   password: string;
-  role: string;
 }
 
 interface RegisterRequest {
@@ -19,8 +18,8 @@ export const login = async (
   request: FastifyRequest<{ Body: LoginRequest }>,
   reply: FastifyReply
 ) => {
-  const { email, password, role } = request.body;
-  const { token, user } = await authService.login(email, password, role);
+  const { email, password } = request.body;
+  const { token, user } = await authService.login(email, password);
   return reply.code(200).send({
     success: true,
     data: { token, user },
@@ -58,8 +57,8 @@ export const register = async (
   // create user (password will be hashed in service)
   const user = await authService.createUser(email, password, name);
 
-  // generate token for the new user (default role 'user')
-  const token = generateToken({ userId: String(user.id), role: 'user' });
+  // generate token for the new user
+  const token = generateToken({ userId: String(user.id) });
 
   return reply.code(201).send({
     success: true,

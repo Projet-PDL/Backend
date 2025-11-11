@@ -9,11 +9,21 @@ import profileInfoRoutes from "../profile/profileInfo.router";
 import languageRoutes from "../language/language.router";
 import experienceRoutes from "../experience/experience.route";
 import authMiddleware, { requireAuth } from '../../middlewares/authMiddleware';
+import requireCvOwnership from '../../middlewares/cvOwnershipMiddleware';
 
 
 const cvRoutes = async (fastify: FastifyInstance) => {
     fastify.register(async (secure) => {
+        // requireAuth must run first to populate request.user
         secure.addHook('preHandler', requireAuth);
+        // Only check ownership when :cvId param exists
+        secure.addHook('preHandler', async (req, reply) => {
+            const params: any = req.params || {};
+            if ('cvId' in params) {
+                return requireCvOwnership(req, reply);
+            }
+            return;
+        });
 
         secure.get('/', { schema: { ...listSchema, tags: ['CV Management'] } }, ctrl.listMyCvs);
         secure.post('/', { schema: { ...createSchema, tags: ['CV Management'] } }, ctrl.createCv);
