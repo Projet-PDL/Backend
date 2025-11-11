@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 type CreateExperienceData = {
     title?: string;
@@ -44,7 +45,7 @@ export async function listByCv(cvId: number) {
     } catch (error: any) {
         console.error('[listByCv] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to list experiences');
+        throw new CreationError('Experience', error, 'experienceService.listByCv');
     }
 }
 
@@ -81,7 +82,7 @@ export async function create(cvId: number, data: CreateExperienceData) {
     } catch (error: any) {
         console.error('[create] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to create experience');
+        throw new CreationError('Experience', error, 'experienceService.create');
     }
 }
 
@@ -92,9 +93,7 @@ export async function getById(cvId: number, experienceId: number) {
         });
 
         if (!experience) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.getById');
         }
 
         return {
@@ -113,7 +112,7 @@ export async function getById(cvId: number, experienceId: number) {
     } catch (error: any) {
         console.error('[getById] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to retrieve experience');
+        throw new CreationError('Experience', error, 'experienceService.getById');
     }
 }
 
@@ -126,9 +125,7 @@ export async function update(
         const experience = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
         if (!experience) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.update');
         }
 
         const updated = await prisma.experience.update({
@@ -162,7 +159,7 @@ export async function update(
     } catch (error: any) {
         console.error('[update] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to update experience');
+        throw new UpdateError('Experience', error, 'experienceService.update');
     }
 }
 
@@ -171,15 +168,13 @@ export async function remove(cvId: number, experienceId: number) {
         const exist = await prisma.experience.findFirst({ where: { id: experienceId, cvId } });
 
         if (!exist) {
-            const err: any = new Error('Experience not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Experience', { id: experienceId }, 'experienceService.remove');
         }
 
         await prisma.experience.delete({ where: { id: experienceId } });
     } catch (error: any) {
         console.error('[remove] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to delete experience');
+        throw new DeletionError('Experience', error, 'experienceService.remove');
     }
 }

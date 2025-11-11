@@ -5,26 +5,39 @@ import logger from '../utils/logger/logger';
 export default function errorHandler(fastify: FastifyInstance) {
   fastify.setErrorHandler(
     (error: FastifyError | BaseError, request: FastifyRequest, reply: FastifyReply) => {
-      // Determine log level: warn for client errors, error for server errors
-      const logLevel = (error instanceof BaseError && error.statusCode < 500) ? 'warn' : 'error';
+      // Decide whether the error is operational (expected) or a server programming error
+      const isOperational = error instanceof BaseError ? error.isOperational : false;
 
-      logger[logLevel]({
-        error: {
-          message: error.message,
-          stack: error.stack,
-          ...(error instanceof BaseError && {
+      // For operational errors (e.g. NotFound, Validation), return the structured error to the client
+      // and log only minimal context (no stack). For non-operational/server errors, log full stack.
+      if (error instanceof BaseError) {
+        // Minimal logging for operational errors
+        logger[(error.statusCode < 500) ? 'warn' : 'error']({
+          error: {
+            message: error.message,
             code: error.errorCode,
             details: error.details,
             context: error.context,
-          }),
-        },
-        request: {
-          method: request.method,
-          url: request.url,
-          params: request.params,
-          query: request.query,
-        },
-      }, 'Unhandled error caught by Fastify');
+          },
+          request: {
+            method: request.method,
+            url: request.url,
+            params: request.params,
+            query: request.query,
+          },
+        }, 'Operational error handled');
+      } else {
+        // Unexpected errors: include stack for diagnostics
+        logger.error({
+          error: { message: error.message, stack: error.stack },
+          request: {
+            method: request.method,
+            url: request.url,
+            params: request.params,
+            query: request.query,
+          },
+        }, 'Unhandled error caught by Fastify');
+      }
 
       // Handle schema validation errors if present
       const validation = (error as any).validation;
@@ -91,8 +104,10 @@ export default function errorHandler(fastify: FastifyInstance) {
       }
 
       if (error instanceof BaseError) {
+        // Send the structured BaseError response as-is (no stack included)
         reply.code(error.statusCode).send(error.toJSON());
       } else {
+        // For non-BaseError, avoid sending stack traces to clients; return generic message
         reply.status(500).send({
           success: false,
           error: {

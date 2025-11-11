@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 type CreateLanguageData = {
     languageName: string;
@@ -29,7 +30,7 @@ export async function listByCv(cvId: number) {
     } catch (error: any) {
         console.error('[listByCv] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to list languages');
+        throw new CreationError('Language', error, 'languageService.listByCv');
     }
 }
 
@@ -54,8 +55,11 @@ export async function create(cvId: number, data: CreateLanguageData) {
         return language;
     } catch (error: any) {
         console.error('[create] Prisma error:', error);
+        if (error?.code === 'P2002') {
+            throw new NotFoundError('Language', { cvId }, 'languageService.create', 'Unique constraint violated');
+        }
         if (error.statusCode) throw error;
-        throw new Error('Failed to create language');
+        throw new CreationError('Language', error, 'languageService.create');
     }
 }
 
@@ -66,9 +70,7 @@ export async function getById(cvId: number, languageId: number) {
         });
 
         if (!language) {
-            const err: any = new Error('Language not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Language', { id: languageId }, 'languageService.getById');
         }
 
         return {
@@ -81,7 +83,7 @@ export async function getById(cvId: number, languageId: number) {
     } catch (error: any) {
         console.error('[getById] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to retrieve language');
+        throw new CreationError('Language', error, 'languageService.getById');
     }
 }
 
@@ -111,7 +113,7 @@ export async function update(
     } catch (error: any) {
         console.error('[update] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to update language');
+        throw new UpdateError('Language', error, 'languageService.update');
     }
 }
 
@@ -122,9 +124,7 @@ export async function remove( languageId: number) {
         });
 
         if (!exist ) {
-            const err: any = new Error('Language not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('Language', { id: languageId }, 'languageService.remove');
         }
 
         await prisma.language.delete({
@@ -133,6 +133,6 @@ export async function remove( languageId: number) {
     } catch (error: any) {
         console.error('[remove] Prisma error:', error);
         if (error.statusCode) throw error;
-        throw new Error('Failed to delete language');
+        throw new DeletionError('Language', error, 'languageService.remove');
     }
 }

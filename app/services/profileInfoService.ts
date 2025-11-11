@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, AlreadyExistsError } from '../errors/crud';
 
 export async function addProfileInfo(cvId: number, dto: any) {
     try {
@@ -24,11 +25,9 @@ export async function addProfileInfo(cvId: number, dto: any) {
     } catch (e: any) {
         console.error('[addProfileInfo]', e);
         if (e?.code === 'P2002') {
-            const err: any = new Error('Profile info already exists for this CV');
-            err.statusCode = 409;
-            throw err;
+            throw new AlreadyExistsError('ProfileInfo', { cvId }, 'profileInfoService.addProfileInfo');
         }
-        throw e;
+        throw new CreationError('ProfileInfo', e, 'profileInfoService.addProfileInfo');
     }
 }
 
@@ -55,11 +54,9 @@ export async function updateProfileInfo(cvId: number, dto: any) {
         return updated;
     } catch (e: any) {
         if (e?.code === 'P2025') {
-            const err: any = new Error('Profile info not found');
-            err.statusCode = 404;
-            throw err;
+            throw new NotFoundError('ProfileInfo', { cvId }, 'profileInfoService.updateProfileInfo');
         }
         console.error('[updateProfileInfo]', e);
-        throw e;
+        throw new UpdateError('ProfileInfo', e, 'profileInfoService.updateProfileInfo');
     }
 }

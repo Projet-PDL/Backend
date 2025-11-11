@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError, AlreadyExistsError } from '../errors/crud';
 
 
 
@@ -18,9 +19,12 @@ export async function addEducation(cvId: number, dto: any) {
             select: { id: true },
         });
         return created.id;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addEducation]', e);
-        throw e;
+        if (e?.code === 'P2002') {
+            throw new AlreadyExistsError('Education', null, 'educationService.addEducation');
+        }
+        throw new CreationError('Education', e, 'educationService.addEducation');
     }
 }
 
@@ -41,9 +45,11 @@ export async function updateEducation(eduId: number, dto: any, p0: any) {
         });
         return updated.id;
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Education not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Education', { id: eduId }, 'educationService.updateEducation');
+        }
         console.error('[updateEducation]', e);
-        throw e;
+        throw new UpdateError('Education', e, 'educationService.updateEducation');
     }
 }
 
@@ -51,8 +57,10 @@ export async function deleteEducation(eduId: number) {
     try {
         await prisma.education.delete({ where: { id: eduId } });
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Education not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Education', { id: eduId }, 'educationService.deleteEducation');
+        }
         console.error('[deleteEducation]', e);
-        throw e;
+        throw new DeletionError('Education', e, 'educationService.deleteEducation');
     }
 }

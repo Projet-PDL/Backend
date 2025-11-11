@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { CreationError, UpdateError } from '../errors/crud';
 
 export async function addInterests(cvId: number, items: Array<any>) {
     try {
@@ -13,9 +14,9 @@ export async function addInterests(cvId: number, items: Array<any>) {
             })),
         });
         return res.count;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addInterests]', e);
-        throw e;
+        throw new CreationError('Interest', e, 'interestService.addInterests');
     }
 }
 
@@ -36,8 +37,8 @@ export async function putInterests(cvId: number, items: Array<any>) {
             }
         });
         return items?.length ?? 0;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[putInterests]', e);
-        throw e;
+        throw new UpdateError('Interest', e, 'interestService.putInterests');
     }
 }

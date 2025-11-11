@@ -15,42 +15,18 @@ const cvRoutes = async (fastify: FastifyInstance) => {
     fastify.register(async (secure) => {
         secure.addHook('preHandler', requireAuth);
 
-    fastify.get('/', { 
-        schema: { 
-            ...listSchema, 
-            tags: ['CV Management'] 
-        } 
-    }, ctrl.listMyCvs);
-    
-    fastify.post('/', { 
-        schema: { 
-            ...createSchema, 
-            tags: ['CV Management'] 
-        } 
-    }, ctrl.createCv);
-    
-    fastify.get('/:cvId', { 
-        schema: { 
-            ...getByIdSchema, 
-            tags: ['CV Management'] 
-        } 
-    }, ctrl.getCvById);
-    
-    fastify.delete('/:cvId', { 
-        schema: { 
-            ...deleteSchema, 
-            tags: ['CV Management'] 
-        } 
-    }, ctrl.deleteCv);
+        secure.get('/', { schema: { ...listSchema, tags: ['CV Management'] } }, ctrl.listMyCvs);
+        secure.post('/', { schema: { ...createSchema, tags: ['CV Management'] } }, ctrl.createCv);
+        secure.get('/:cvId', { schema: { ...getByIdSchema, tags: ['CV Management'] } }, ctrl.getCvById);
+        secure.delete('/:cvId', { schema: { ...deleteSchema, tags: ['CV Management'] } }, ctrl.deleteCv);
 
-    fastify.register(educationRoutes, { prefix: '/:cvId/education' });
-    fastify.register(skillRoutes, { prefix: '/:cvId/skill' });
-    fastify.register(certificationRoutes, { prefix: '/:cvId/certification' });
-    fastify.register(interestRoutes, { prefix: '/:cvId/interest' });
-    fastify.register(profileInfoRoutes, { prefix: '/:cvId/profile-info' });
-    fastify.register(languageRoutes, { prefix: '/:cvId/language' });
-    fastify.register(experienceRoutes, { prefix: '/:cvId/experience' });
-    
+        secure.register(educationRoutes, { prefix: '/:cvId/education' });
+        secure.register(skillRoutes, { prefix: '/:cvId/skill' });
+        secure.register(certificationRoutes, { prefix: '/:cvId/certification' });
+        secure.register(interestRoutes, { prefix: '/:cvId/interest' });
+        secure.register(profileInfoRoutes, { prefix: '/:cvId/profile-info' });
+        secure.register(languageRoutes, { prefix: '/:cvId/language' });
+        secure.register(experienceRoutes, { prefix: '/:cvId/experience' });
     });
 };
 

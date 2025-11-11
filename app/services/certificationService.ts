@@ -1,4 +1,5 @@
 import prisma from './prismaService';
+import { NotFoundError, CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 export async function addCertification(cvId: number, dto: any) {
     try {
@@ -15,9 +16,9 @@ export async function addCertification(cvId: number, dto: any) {
             select: { id: true },
         });
         return created.id;
-    } catch (e) {
+    } catch (e: any) {
         console.error('[addCertification]', e);
-        throw e;
+        throw new CreationError('Certification', e, 'certificationService.addCertification');
     }
 }
 
@@ -45,9 +46,11 @@ export async function updateCertification(cvId: number, certId: number, dto: any
         });
         return updated.id;
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Certification not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Certification', { id: certId }, 'certificationService.updateCertification');
+        }
         console.error('[updateCertification]', e);
-        throw e;
+        throw new UpdateError('Certification', e, 'certificationService.updateCertification');
     }
 }
 
@@ -61,8 +64,10 @@ export async function deleteCertification(cvId: number, certId: number) {
         }
         await prisma.certification.delete({ where: { id: certId } });
     } catch (e: any) {
-        if (e?.code === 'P2025') { const err: any = new Error('Certification not found'); err.statusCode = 404; throw err; }
+        if (e?.code === 'P2025') {
+            throw new NotFoundError('Certification', { id: certId }, 'certificationService.deleteCertification');
+        }
         console.error('[deleteCertification]', e);
-        throw e;
+        throw new DeletionError('Certification', e, 'certificationService.deleteCertification');
     }
 }

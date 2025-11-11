@@ -10,7 +10,7 @@ import { TokenVerificationError } from '../errors/auth/TokenVerificationError';
 
 
 export const authService = {
-  async login(email: string, password: string, role: string): Promise<string> {
+  async login(email: string, password: string, role: string): Promise<{ token: string; user: any }> {
     logger.info({ email, role }, 'Login attempt started');
 
     const user: any = await prisma.user.findUnique({
@@ -30,7 +30,8 @@ export const authService = {
     try {
       const token = generateToken({ userId: String(user.id), role });
       logger.info({ email, role, userId: user.id }, 'Token generated successfully');
-      return token;
+      // Return token and minimal user account info
+      return { token, user: { id: user.id, email: user.email, name: user.name, role } };
     } catch (err) {
       throw new TokenGenerationError(err);
     }
