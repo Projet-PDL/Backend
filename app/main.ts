@@ -49,6 +49,7 @@ async function startServer() {
 
 
   // 2. Register Swagger plugin (generates the OpenAPI JSON/YAML endpoints)
+  // Add a global security scheme for Bearer tokens so routes don't need to specify headers every time.
   fastify.register(fastifySwagger as any, {
     swagger: {
       info: {
@@ -63,7 +64,35 @@ async function startServer() {
       host: domain,
       schemes: isProd ? ['https'] : ['http'],
       consumes: ['application/json'],
-      produces: ['application/json']
+      produces: ['application/json'],
+      // Swagger 2.0 securityDefinitions
+      securityDefinitions: {
+        Bearer: {
+          type: 'apiKey',
+          name: 'authorization',
+          in: 'header',
+          description: 'Enter your bearer token in the format **Bearer &lt;token>**',
+        },
+      },
+      security: [{ Bearer: [] }],
+    },
+    // OpenAPI3 components (some swagger UI consumers use OpenAPI3)
+    openapi: {
+      info: {
+        title: 'My API',
+        description: 'API Documentation generated with Fastify Swagger',
+        version: '1.0.0',
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+      security: [{ bearerAuth: [] }],
     },
     exposeRoute: true,
   });

@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import * as service from '../services/cvService';
+import { BaseError } from '../errors/BaseError';
 
 type ListQuery = {
     q?: string;
@@ -21,10 +22,14 @@ export async function listMyCvs(
         const out = await service.listByUser(userId, { q, updatedAfter, page, size });
         return reply.code(200).send({ success: true, data: out });
     } catch (error: any) {
+        if (error instanceof BaseError) {
+            // send structured error as defined by BaseError
+            return reply.code(error.statusCode).send(error.toJSON());
+        }
         console.error('[listMyCvs] Error:', error);
-        return reply.code(error.statusCode || 500).send({
+        return reply.code(500).send({
             success: false,
-            message: error.message || 'An unexpected error occurred',
+            message: error?.message || 'An unexpected error occurred',
         });
     }
 }
@@ -34,16 +39,16 @@ export async function createCv(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { title } = request.body || {};
         const cv = await service.create(userId, { title });
         return reply.code(201).send({ success: true, data: cv });
     } catch (error: any) {
+        if (error instanceof BaseError) {
+            return reply.code(error.statusCode).send(error.toJSON());
+        }
         console.error('[createCv] Error:', error);
-        return reply.code(error.statusCode || 500).send({
-            success: false,
-            message: error.message || 'Failed to create CV',
-        });
+        return reply.code(500).send({ success: false, message: error?.message || 'Failed to create CV' });
     }
 }
 
@@ -52,16 +57,16 @@ export async function getCvById(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { cvId } = request.params;
         const data = await service.getById(userId, cvId);
         return reply.code(200).send({ success: true, data });
     } catch (error: any) {
+        if (error instanceof BaseError) {
+            return reply.code(error.statusCode).send(error.toJSON());
+        }
         console.error('[getCvById] Error:', error);
-        return reply.code(error.statusCode || 500).send({
-            success: false,
-            message: error.message || 'Failed to retrieve CV',
-        });
+        return reply.code(500).send({ success: false, message: error?.message || 'Failed to retrieve CV' });
     }
 }
 
@@ -70,15 +75,15 @@ export async function deleteCv(
     reply: FastifyReply
 ) {
     try {
-        const userId = (request as any).user?.id as string;
+        const userId = (request as any).user?.id as number;
         const { cvId } = request.params;
         await service.remove(userId, cvId);
         return reply.code(204).send();
     } catch (error: any) {
+        if (error instanceof BaseError) {
+            return reply.code(error.statusCode).send(error.toJSON());
+        }
         console.error('[deleteCv] Error:', error);
-        return reply.code(error.statusCode || 500).send({
-            success: false,
-            message: error.message || 'Failed to delete CV',
-        });
+        return reply.code(500).send({ success: false, message: error?.message || 'Failed to delete CV' });
     }
 }

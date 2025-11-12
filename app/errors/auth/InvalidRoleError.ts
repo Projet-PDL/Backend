@@ -1,17 +1,17 @@
 import { BaseError } from '../BaseError';
 
 export class InvalidRoleError extends BaseError {
-    constructor(role: string) {
-      super(
-        `Role "${role}" is not recognized.`,
-        'INVALID_ROLE',
-        400,
-        { providedRole: role },
-        'AuthService.validateRole',
-        'Ensure you pass one of the valid roles (e.g., user, admin, etc.).'
-      );
-    }
+  constructor() {
+    super(
+      `Invalid role provided.`,
+      'INVALID_ROLE',
+      400,
+      undefined,
+      'AuthService.validateRole',
+      'Roles are no longer supported. Remove role from requests.'
+    );
   }
+}
 
 
 
