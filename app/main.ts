@@ -6,6 +6,7 @@ import { PrismaClient } from './prisma/generated'
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import logger from './utils/logger/logger';
+import multipart from '@fastify/multipart';
 
 const isProd = process.env.ENV ? (process.env.ENV === 'PROD') : false;
 
@@ -95,6 +96,32 @@ async function startServer() {
       security: [{ bearerAuth: [] }],
     },
     exposeRoute: true,
+    transform: ({ schema, url }: any) => {
+      // Transform the schema for file upload routes
+      if (url === '/users/me/image' && schema) {
+        const transformed = { ...schema };
+        
+        // Add formData parameter for Swagger 2.0
+        if (!transformed.parameters) {
+          transformed.parameters = [];
+        }
+        
+        // Check if file parameter already exists
+        const hasFileParam = transformed.parameters.some((p: any) => p.name === 'file' && p.in === 'formData');
+        if (!hasFileParam) {
+          transformed.parameters.push({
+            in: 'formData',
+            name: 'file',
+            type: 'file',
+            required: true,
+            description: 'Profile image file to upload'
+          });
+        }
+        
+        return { schema: transformed, url };
+      }
+      return { schema, url };
+    },
   });
 
   fastify.register(fastifySwaggerUi, {
