@@ -8,4 +8,12 @@ export async function updateProfilePicture(userId: number, imageUrl: string) {
   return updated;
 }
 
-export default { updateProfilePicture };
+export async function getUserProfilePicture(userId: number) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { profilePicture: true, id: true, email: true, name: true }
+  });
+  return user;
+}
+
+export default { updateProfilePicture, getUserProfilePicture };

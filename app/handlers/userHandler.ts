@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { uploadUserImage } from '../services/firebaseService';
-import { updateProfilePicture } from '../services/userService';
+import { updateProfilePicture, getUserProfilePicture } from '../services/userService';
 
 export const updateProfileImage = async (
   request: FastifyRequest,
@@ -37,4 +37,35 @@ export const updateProfileImage = async (
   }
 };
 
-export default { updateProfileImage };
+export const getProfileImage = async (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => {
+  try {
+    const user = (request as any).user;
+    if (!user || !user.id) {
+      return reply.code(401).send({ success: false, message: 'Not authenticated' });
+    }
+
+    const userData = await getUserProfilePicture(Number(user.id));
+    
+    if (!userData) {
+      return reply.code(404).send({ success: false, message: 'User not found' });
+    }
+
+    return reply.code(200).send({ 
+      success: true, 
+      data: { 
+        id: userData.id,
+        email: userData.email,
+        name: userData.name,
+        profilePicture: userData.profilePicture 
+      } 
+    });
+  } catch (err: any) {
+    request.log.error('Failed to get profile image', err);
+    return reply.code(500).send({ success: false, message: 'Failed to retrieve user data' });
+  }
+};
+
+export default { updateProfileImage, getProfileImage };
