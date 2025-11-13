@@ -1,6 +1,8 @@
 import { FastifyInstance } from 'fastify';
 import * as ctrl from '../../handlers/cvHandler';
 import { listSchema, createSchema, getByIdSchema, deleteSchema } from './cv.schema';
+import { generateFromLinkedInSchema } from './linkedin.schema';
+import * as linkedInCtrl from '../../handlers/linkedInHandler';
 import educationRoutes from "../education/education.router";
 import skillRoutes from "../skill/skill.router";
 import certificationRoutes from "../certification/certification.router";
@@ -27,6 +29,7 @@ const cvRoutes = async (fastify: FastifyInstance) => {
 
         secure.get('/', { schema: { ...listSchema, tags: ['CV Management'] } }, ctrl.listMyCvs);
         secure.post('/', { schema: { ...createSchema, tags: ['CV Management'] } }, ctrl.createCv);
+        secure.post('/:cvId/generate-from-linkedin', { schema: { ...generateFromLinkedInSchema, tags: ['CV Management'] } }, linkedInCtrl.generateCVFromLinkedIn);
         secure.get('/:cvId', { schema: { ...getByIdSchema, tags: ['CV Management'] } }, ctrl.getCvById);
         secure.delete('/:cvId', { schema: { ...deleteSchema, tags: ['CV Management'] } }, ctrl.deleteCv);
 
