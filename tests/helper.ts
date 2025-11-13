@@ -3,15 +3,15 @@ import Fastify, { FastifyInstance } from 'fastify';
 import { prismaMock } from './setup';
 
 // Import de tes routes (adapte les chemins selon ta structure)
-import authRouter from '../app/routers/auth';
-import cvRouter from '../app/routers/cv';
-import educationRouter from '../app/routers/education';
-import experienceRouter from '../app/routers/experience';
-import skillRouter from '../app/routers/skill';
-import languageRouter from '../app/routers/language';
-import certificationRouter from '../app/routers/certification';
-import interestRouter from '../app/routers/interests';
-import profileRouter from '../app/routers/profile';
+import authRouter from '../app/routers/auth/auth.router';
+import cvRouter from '../app/routers/cv/cv.router';
+import educationRouter from '../app/routers/education/education.router';
+import experienceRouter from '../app/routers/experience/experience.route';
+import skillRouter from '../app/routers/skill/skill.router';
+import languageRouter from '../app/routers/language/language.router';
+import certificationRouter from '../app/routers/certification/certification.router';
+import interestRouter from '../app/routers/interest/interest.router';
+import profileRouter from '../app/routers/profile/profileInfo.router';
 
 export async function build(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -23,14 +23,15 @@ export async function build(): Promise<FastifyInstance> {
 
   // Enregistre toutes tes routes
   app.register(authRouter, { prefix: '/auth' });
+
   app.register(cvRouter, { prefix: '/cvs' });
-  app.register(educationRouter, { prefix: '/cvs' });
-  app.register(experienceRouter, { prefix: '/cvs' });
-  app.register(skillRouter, { prefix: '/cvs' });
-  app.register(languageRouter, { prefix: '/cvs' });
-  app.register(certificationRouter, { prefix: '/cvs' });
-  app.register(interestRouter, { prefix: '/cvs' });
-  app.register(profileRouter, { prefix: '/cvs' });
+  app.register(educationRouter, { prefix: '/cvs/education' });
+  app.register(experienceRouter, { prefix: '/cvs/experience' });
+  app.register(skillRouter, { prefix: '/cvs/skills' });
+  app.register(languageRouter, { prefix: '/cvs/languages' });
+  app.register(certificationRouter, { prefix: '/cvs/certifications' });
+  app.register(interestRouter, { prefix: '/cvs/interests' });
+  app.register(profileRouter, { prefix: '/cvs/profile' });
 
   await app.ready();
   return app;

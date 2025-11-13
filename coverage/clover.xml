@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1763041780965" clover="3.2.0">
+  <project timestamp="1763041780965" name="All files">
+    <metrics statements="759" coveredstatements="343" conditionals="513" coveredconditionals="12" methods="109" coveredmethods="40" elements="1381" coveredelements="395" complexity="0" loc="759" ncloc="759" packages="17" files="49" classes="49"/>
+    <package name="errors">
+      <metrics statements="14" coveredstatements="14" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="3"/>
+      <file name="BaseError.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\BaseError.ts">
+        <metrics statements="14" coveredstatements="14" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="53" count="24" type="stmt"/>
+      </file>
+    </package>
+    <package name="errors.auth">
+      <metrics statements="12" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+      <file name="InvalidCredentialsError.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\auth\InvalidCredentialsError.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+      <file name="TokenGenerationError.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\auth\TokenGenerationError.ts">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="TokenVerificationError.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\auth\TokenVerificationError.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+      </file>
+      <file name="UserNotFoundError.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\auth\UserNotFoundError.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="errors.crud">
+      <metrics statements="14" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="CrudErrors.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\errors\crud\CrudErrors.ts">
+        <metrics statements="14" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="78" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="handlers">
+      <metrics statements="205" coveredstatements="47" conditionals="134" coveredconditionals="0" methods="29" coveredmethods="4"/>
+      <file name="authHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\authHandler.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+      </file>
+      <file name="certificationHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\certificationHandler.ts">
+        <metrics statements="19" coveredstatements="4" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="cond" truecount="0" falsecount="4"/>
+      </file>
+      <file name="cvHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\cvHandler.ts">
+        <metrics statements="42" coveredstatements="6" conditionals="50" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="73" count="8" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="cond" truecount="0" falsecount="6"/>
+      </file>
+      <file name="educationHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\educationHandler.ts">
+        <metrics statements="19" coveredstatements="4" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
+      </file>
+      <file name="experienceHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\experienceHandler.ts">
+        <metrics statements="38" coveredstatements="6" conditionals="20" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="8" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="79" count="8" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="97" count="8" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="interestHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\interestHandler.ts">
+        <metrics statements="13" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="4"/>
+      </file>
+      <file name="languageHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\languageHandler.ts">
+        <metrics statements="31" coveredstatements="5" conditionals="16" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="72" count="8" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="profileInfoHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\profileInfoHandler.ts">
+        <metrics statements="17" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="8" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+      <file name="skillHandler.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\handlers\skillHandler.ts">
+        <metrics statements="13" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="4"/>
+      </file>
+    </package>
+    <package name="middlewares">
+      <metrics statements="40" coveredstatements="14" conditionals="21" coveredconditionals="3" methods="4" coveredmethods="1"/>
+      <file name="authMiddleware.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\middlewares\authMiddleware.ts">
+        <metrics statements="18" coveredstatements="10" conditionals="11" coveredconditionals="3" methods="3" coveredmethods="1"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="11" count="3" type="cond" truecount="2" falsecount="2"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+      </file>
+      <file name="cvOwnershipMiddleware.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\middlewares\cvOwnershipMiddleware.ts">
+        <metrics statements="22" coveredstatements="4" conditionals="10" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="baseHeaders.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\baseHeaders.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+      </file>
+      <file name="baseSchema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\baseSchema.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.auth">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="auth.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\auth\auth.router.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+      </file>
+      <file name="auth.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\auth\auth.schema.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.certification">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="certification.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\certification\certification.router.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+      </file>
+      <file name="certification.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\certification\certification.schema.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.cv">
+      <metrics statements="38" coveredstatements="34" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="4"/>
+      <file name="cv.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\cv\cv.router.ts">
+        <metrics statements="31" coveredstatements="27" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="4"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+      </file>
+      <file name="cv.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\cv\cv.schema.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="127" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.education">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="education.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\education\education.router.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+      </file>
+      <file name="education.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\education\education.schema.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="51" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.experience">
+      <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="experience.route.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\experience\experience.route.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="11" count="16" type="stmt"/>
+        <line num="14" count="16" type="stmt"/>
+        <line num="15" count="16" type="stmt"/>
+        <line num="16" count="16" type="stmt"/>
+        <line num="17" count="16" type="stmt"/>
+        <line num="18" count="16" type="stmt"/>
+        <line num="21" count="8" type="stmt"/>
+      </file>
+      <file name="experience.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\experience\experience.schema.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="65" count="8" type="stmt"/>
+        <line num="92" count="8" type="stmt"/>
+        <line num="129" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.interest">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="interest.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\interest\interest.router.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+      </file>
+      <file name="interest.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\interest\interest.schema.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.language">
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="language.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\language\language.router.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="13" count="16" type="stmt"/>
+        <line num="14" count="16" type="stmt"/>
+        <line num="15" count="16" type="stmt"/>
+        <line num="16" count="16" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+      </file>
+      <file name="language.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\language\language.schema.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="24" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.profile">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="profileInfo.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\profile\profileInfo.router.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+      </file>
+      <file name="profileInfo.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\profile\profileInfo.schema.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="routers.skill">
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="skill.router.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\skill\skill.router.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+      </file>
+      <file name="skill.schema.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\routers\skill\skill.schema.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="305" coveredstatements="86" conditionals="341" coveredconditionals="6" methods="38" coveredmethods="5"/>
+      <file name="authService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\authService.ts">
+        <metrics statements="31" coveredstatements="26" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="20" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+      </file>
+      <file name="certificationService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\certificationService.ts">
+        <metrics statements="33" coveredstatements="5" conditionals="44" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="67" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+      </file>
+      <file name="cvService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\cvService.ts">
+        <metrics statements="47" coveredstatements="7" conditionals="13" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="67" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="80" count="8" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+      </file>
+      <file name="educationService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\educationService.ts">
+        <metrics statements="25" coveredstatements="5" conditionals="57" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+      </file>
+      <file name="experienceService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\experienceService.ts">
+        <metrics statements="44" coveredstatements="7" conditionals="56" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="89" count="8" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="95" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="114" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="119" count="8" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="127" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="166" count="8" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="170" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="177" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="178" count="0" type="stmt"/>
+      </file>
+      <file name="interestService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\interestService.ts">
+        <metrics statements="20" coveredstatements="4" conditionals="42" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="8"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+      </file>
+      <file name="jwtService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\jwtService.ts">
+        <metrics statements="21" coveredstatements="17" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="3" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="15" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+      </file>
+      <file name="languageService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\languageService.ts">
+        <metrics statements="43" coveredstatements="7" conditionals="26" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="90" count="8" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="115" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="120" count="8" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="136" count="0" type="stmt"/>
+      </file>
+      <file name="profileInfoService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\profileInfoService.ts">
+        <metrics statements="18" coveredstatements="4" conditionals="82" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+      </file>
+      <file name="skillService.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\services\skillService.ts">
+        <metrics statements="23" coveredstatements="4" conditionals="13" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils.logger">
+      <metrics statements="14" coveredstatements="13" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="logger.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\utils\logger\logger.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+        <line num="10" count="48" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+      </file>
+      <file name="streams.ts" path="C:\Users\Dell\Documents\Parcours universitaires\M1 MIAGE\PDL\Monter en compétence API JavaScript\Backend\app\utils\logger\streams.ts">
+        <metrics statements="9" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
