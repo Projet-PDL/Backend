@@ -15,6 +15,7 @@ interface LinkedInProfile {
   experience?: LinkedInExperience[];
   education?: LinkedInEducation[];
   languages?: LinkedInLanguage[];
+  skills?: LinkedInSkill[];
   certifications?: LinkedInCertification[];
   volunteer_experience?: LinkedInVolunteerExperience[];
   publications?: LinkedInPublication[];
@@ -80,6 +81,12 @@ interface LinkedInProject {
 interface LinkedInBioLink {
   title?: string;
   link?: string;
+  [key: string]: any;
+}
+
+interface LinkedInSkill {
+  title?: string;
+  name?: string;
   [key: string]: any;
 }
 
@@ -244,6 +251,15 @@ export function mapLinkedInToCV(linkedInData: LinkedInProfile): CVData {
   }
   
   const skills: CVData['skills'] = [];
+  if (linkedInData.skills && Array.isArray(linkedInData.skills)) {
+    linkedInData.skills.forEach((skill, index) => {
+      const skillName = skill.title || skill.name || 'Unnamed Skill';
+      skills.push({
+        skillName: skillName,
+        position: index,
+      });
+    });
+  }
   
   const certifications: CVData['certifications'] = [];
   if (linkedInData.certifications) {

@@ -49,10 +49,10 @@ export const generateCVFromLinkedIn = async (
 
     request.log.info(`Scraping LinkedIn profile: ${linkedInUrl}`);
 
-    // const linkedInProfile = await scrapeLinkedInProfile(linkedInUrl);
-    // const cvData: CVData = mapLinkedInToCV(linkedInProfile);
+    const linkedInProfile = await scrapeLinkedInProfile(linkedInUrl);
+    const cvData: CVData = mapLinkedInToCV(linkedInProfile);
 
-    const cvData: CVData = await getMockCV(linkedInUrl); // Mocked data for testing
+    // const cvData: CVData = await getMockCV(linkedInUrl); // Mocked data for testing
 
     request.log.info(`Synchronizing LinkedIn data into CV ${cvId} for user ${user.id}`);
 
