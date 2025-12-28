@@ -22,6 +22,7 @@ interface LinkedInProfile {
   experience?: LinkedInExperience[];
   education?: LinkedInEducation[];
   languages?: LinkedInLanguage[];
+  skills?: LinkedInSkill[];
   certifications?: LinkedInCertification[];
   volunteer_experience?: LinkedInVolunteerExperience[];
   publications?: LinkedInPublication[];
@@ -88,6 +89,12 @@ interface LinkedInProject {
 interface LinkedInBioLink {
   title?: string;
   link?: string;
+  [key: string]: any;
+}
+
+interface LinkedInSkill {
+  title?: string;
+  name?: string;
   [key: string]: any;
 }
 
