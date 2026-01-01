@@ -364,10 +364,10 @@ export const mockCV: CVData = {
   title: "Software Engineer & Full-Stack Developer",
   profileInfo: {
     firstName: "Manel",
-    lastName: "Ben Ahmed",
+    lastName: "Goudjil",
     headline: "Computer Science Student | Full-Stack Developer | Open Source Contributor",
     professionalSummary: "Passionate Computer Science student with 3+ years of hands-on experience in full-stack development. Specialized in building scalable web applications using modern JavaScript frameworks and cloud technologies. Strong problem-solving skills with a focus on clean code and user-centric design. Actively contributing to open-source projects and seeking opportunities to apply cutting-edge technologies in real-world solutions.",
-    email: "manel.benahmed@email.com",
+    email: "manel.goudjil@email.com",
     phone: "+33 6 12 34 56 78",
     street: "15 Rue de la République",
     city: "Rennes",
