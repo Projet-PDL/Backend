@@ -39,3 +39,17 @@ export const putInterestsSchema = {
         ...CommonErrorResponses,
     },
 };
+
+const ParamsCvIdAndInterestId = Type.Object({
+    cvId: Type.Integer(),
+    interestId: Type.Integer(),
+});
+
+export const deleteInterestSchema = {
+    params: ParamsCvIdAndInterestId,
+    headers: BearerAuthHeader,
+    response: {
+        200: Type.Object({ success: Type.Literal(true), message: Type.String() }),
+        ...CommonErrorResponses,
+    },
+};
