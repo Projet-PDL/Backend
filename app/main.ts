@@ -1,4 +1,7 @@
-import dotenv from 'dotenv';
+// CRITICAL: Load environment variables BEFORE any imports
+// Using require() because ES6 imports are hoisted and run first
+require('dotenv').config();
+
 import Fastify from 'fastify';
 import registerMiddlewares from './middlewares';
 import registerRoutes from './routers';
@@ -7,6 +10,8 @@ import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import logger from './utils/logger/logger';
 import multipart from '@fastify/multipart';
+import mongoDBService from './services/mongoDBService';
+import batchLoggerService from './services/batchLoggerService';
 
 const isProd = process.env.ENV ? (process.env.ENV === 'PROD') : false;
 
@@ -14,10 +19,6 @@ const host = process.env.HOST || 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const domain = process.env.DOMAIN || host+':'+port;
-
-
-// Load environment variables from .env
-dotenv.config();
 
 // Ensure DATABASE_URL is available
 if (!process.env.DATABASE_URL) {
@@ -44,7 +45,18 @@ async function checkDatabaseConnection() {
 async function startServer() {
   // Check database connection first
   await checkDatabaseConnection();
-  
+
+  // Initialize MongoDB for batch logging
+  if (process.env.MONGODB_LOGGING_ENABLED === 'true') {
+    try {
+      await mongoDBService.connect();
+      const config = batchLoggerService.getConfig();
+      logger.info(`Batch logger initialized with batch size: ${config.batchSize}, flush interval: ${config.flushInterval}ms`);
+    } catch (error) {
+      logger.error({ error }, 'Failed to initialize MongoDB batch logging. Continuing without it.');
+    }
+  }
+
   // 1. Register middlewares
   await registerMiddlewares(fastify);
 
@@ -147,6 +159,17 @@ async function startServer() {
 // Add graceful shutdown
 const gracefulShutdown = async () => {
   console.log('Shutting down gracefully');
+
+  // Flush any remaining logs before shutting down
+  if (process.env.MONGODB_LOGGING_ENABLED === 'true') {
+    try {
+      await batchLoggerService.forceFlush();
+      await mongoDBService.disconnect();
+    } catch (error) {
+      console.error('Error during batch logger shutdown:', error);
+    }
+  }
+
   await prisma.$disconnect();
   process.exit(0);
 };
