@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import * as cvInterest from '../services/interestService';
 
 type CvParams = { cvId: number };
+type CvAndInterestParams = { cvId: number; interestId: number };
 
 export async function addInterests(req: FastifyRequest<{ Params: CvParams }>, reply: FastifyReply) {
     try {
@@ -20,5 +21,15 @@ export async function putInterests(req: FastifyRequest<{ Params: CvParams }>, re
     } catch (e: any) {
         console.error('[putInterests]', e);
         return reply.code(e.statusCode || 500).send({ success: false, message: e.message || 'Failed to replace interests' });
+    }
+}
+
+export async function deleteInterest(req: FastifyRequest<{ Params: CvAndInterestParams }>, reply: FastifyReply) {
+    try {
+        await cvInterest.deleteInterest(req.params.cvId, req.params.interestId);
+        return reply.code(200).send({ success: true, message: 'Interest deleted successfully' });
+    } catch (e: any) {
+        console.error('[deleteInterest]', e);
+        return reply.code(e.statusCode || 500).send({ success: false, message: e.message || 'Failed to delete interest' });
     }
 }

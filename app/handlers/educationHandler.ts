@@ -27,8 +27,7 @@ export async function updateEducation(req: FastifyRequest<{ Params: CvEduParams 
 
 export async function deleteEducation(req: FastifyRequest<{ Params: CvEduParams }>, reply: FastifyReply) {
     try {
-
-        await cvEducation.deleteEducation(req.params.eduId);
+        await cvEducation.deleteEducation(req.params.cvId, req.params.eduId);
         return reply.code(204).send();
     } catch (e: any) {
         console.error('[deleteEducation]', e);

@@ -1,11 +1,21 @@
 import jwt from 'jsonwebtoken';
-import { generateToken, verifyToken, TokenPayload } from '../app/services/jwtService';
+import { generateToken, verifyToken, verifyTokenWithCache, TokenPayload } from '../app/services/jwtService';
 import { TokenGenerationError } from '../app/errors/auth/TokenGenerationError';
 import { TokenVerificationError } from '../app/errors/auth/TokenVerificationError';
 
 // Mock jwt module
 jest.mock('jsonwebtoken');
 const mockedJwt = jwt as jest.Mocked<typeof jwt>;
+
+// Mock Redis service (simulate Redis unavailable)
+jest.mock('../app/services/redisService', () => ({
+  redisService: {
+    get: jest.fn().mockResolvedValue(null),
+    set: jest.fn().mockResolvedValue(false),
+    del: jest.fn().mockResolvedValue(false),
+    isRedisAvailable: jest.fn().mockReturnValue(false),
+  },
+}));
 
 // Mock logger
 jest.mock('../app/utils/logger/logger', () => ({
@@ -147,6 +157,51 @@ describe('jwtService', () => {
         const result = verifyToken(token);
         expect(result.userId).toBe('123');
       });
+    });
+  });
+
+  describe('verifyTokenWithCache', () => {
+    it('should verify token when Redis is unavailable (fallback)', async () => {
+      const decodedPayload = { userId: '123', iat: 1234567890, exp: 1234567890 };
+      mockedJwt.verify.mockReturnValue(decodedPayload as any);
+
+      const result = await verifyTokenWithCache(mockToken);
+
+      expect(result).toEqual({ userId: '123' });
+      expect(mockedJwt.verify).toHaveBeenCalledWith(mockToken, expect.any(String));
+    });
+
+    it('should throw TokenVerificationError on invalid token (no Redis)', async () => {
+      mockedJwt.verify.mockImplementation(() => {
+        throw new Error('Invalid token');
+      });
+
+      await expect(verifyTokenWithCache('invalid.token')).rejects.toThrow(
+        TokenVerificationError
+      );
+    });
+
+    it('should throw TokenVerificationError on expired token (no Redis)', async () => {
+      const expiredError = new Error('jwt expired');
+      (expiredError as any).name = 'TokenExpiredError';
+      mockedJwt.verify.mockImplementation(() => {
+        throw expiredError;
+      });
+
+      await expect(verifyTokenWithCache('expired.token')).rejects.toThrow(
+        TokenVerificationError
+      );
+    });
+
+    it('should work normally without Redis (graceful degradation)', async () => {
+      // Redis is mocked to always return null (cache miss)
+      const decodedPayload = { userId: '456', iat: Date.now(), exp: Date.now() + 3600 };
+      mockedJwt.verify.mockReturnValue(decodedPayload as any);
+
+      const result = await verifyTokenWithCache('some.jwt.token');
+
+      expect(result).toEqual({ userId: '456' });
+      // Should work without throwing errors even though Redis is unavailable
     });
   });
 });

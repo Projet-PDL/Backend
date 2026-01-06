@@ -1,5 +1,5 @@
 import prisma from './prismaService';
-import { CreationError, UpdateError } from '../errors/crud';
+import { CreationError, UpdateError, DeletionError } from '../errors/crud';
 
 export async function addInterests(cvId: number, items: Array<any>) {
     try {
@@ -40,5 +40,19 @@ export async function putInterests(cvId: number, items: Array<any>) {
     } catch (e: any) {
         console.error('[putInterests]', e);
         throw new UpdateError('Interest', e, 'interestService.putInterests');
+    }
+}
+
+export async function deleteInterest(cvId: number, interestId: number) {
+    try {
+        await prisma.interest.delete({
+            where: {
+                id: interestId,
+                cvId: cvId
+            },
+        });
+    } catch (e: any) {
+        console.error('[deleteInterest]', e);
+        throw new DeletionError('Interest', e, 'interestService.deleteInterest');
     }
 }

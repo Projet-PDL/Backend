@@ -28,10 +28,13 @@ export async function addEducation(cvId: number, dto: any) {
     }
 }
 
-export async function updateEducation(eduId: number, dto: any, p0: any) {
+export async function updateEducation(cvId: number, eduId: number, dto: any) {
     try {
         const updated = await prisma.education.update({
-            where: { id: eduId },
+            where: {
+                id: eduId,
+                cvId: cvId
+            },
             data: {
                 ...(dto.school !== undefined ? { school: dto.school } : {}),
                 ...(dto.degree !== undefined ? { degree: dto.degree } : {}),
@@ -53,9 +56,14 @@ export async function updateEducation(eduId: number, dto: any, p0: any) {
     }
 }
 
-export async function deleteEducation(eduId: number) {
+export async function deleteEducation(cvId: number, eduId: number) {
     try {
-        await prisma.education.delete({ where: { id: eduId } });
+        await prisma.education.delete({
+            where: {
+                id: eduId,
+                cvId: cvId
+            }
+        });
     } catch (e: any) {
         if (e?.code === 'P2025') {
             throw new NotFoundError('Education', { id: eduId }, 'educationService.deleteEducation');
