@@ -63,4 +63,4 @@ cd - > /dev/null
 
 # Start development server
 echo -e "${GREEN}Starting development server...${NC}"
-npm run dev
+nohup npm run start > app.log 2>&1 &
