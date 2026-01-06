@@ -93,8 +93,7 @@ class MongoDBService {
     }
 
     try {
-      const result = await this.logsCollection.insertMany(logs, { ordered: false });
-      logger.debug(`Inserted ${result.insertedCount} logs to MongoDB`);
+      await this.logsCollection.insertMany(logs, { ordered: false });
     } catch (error) {
       logger.error({ error }, 'Failed to insert logs to MongoDB');
     }
