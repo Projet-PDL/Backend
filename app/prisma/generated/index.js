@@ -264,6 +264,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -274,7 +275,7 @@ const config = {
   },
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id             Int      @id @default(autoincrement())\n  email          String   @unique\n  name           String?\n  password       String\n  googleAuthId   String?\n  profilePicture String?\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  cvs CV[]\n}\n\nmodel CV {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  title     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user           User            @relation(fields: [userId], references: [id])\n  profileInfo    ProfileInfo?\n  experiences    Experience[]\n  skills         Skill[]\n  certifications Certification[]\n  interests      Interest[]\n  languages      Language[]\n  educations     Education[]\n}\n\nmodel ProfileInfo {\n  cvId                Int      @id\n  firstName           String?\n  lastName            String?\n  headline            String?\n  professionalSummary String?\n  email               String?\n  phone               String?\n  street              String?\n  city                String?\n  postalCode          String?\n  region              String?\n  country             String?\n  websiteUrl          String?\n  createdAt           DateTime @default(now())\n  updatedAt           DateTime @updatedAt\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Experience {\n  id          Int       @id @default(autoincrement())\n  cvId        Int\n  title       String?\n  company     String?\n  location    String?\n  startDate   DateTime?\n  endDate     DateTime?\n  isCurrent   Boolean?  @default(false)\n  description String?\n  position    Int?\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Skill {\n  id        Int      @id @default(autoincrement())\n  cvId      Int\n  skillName String\n  position  Int?\n  createdAt DateTime @default(now())\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Certification {\n  id             Int       @id @default(autoincrement())\n  cvId           Int\n  name           String\n  issuer         String?\n  issueDate      DateTime?\n  expirationDate DateTime?\n  credentialUrl  String?\n  position       Int?\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Interest {\n  id        Int      @id @default(autoincrement())\n  cvId      Int\n  name      String\n  category  String?\n  source    String?\n  position  Int?\n  createdAt DateTime @default(now())\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Language {\n  id               Int      @id @default(autoincrement())\n  cvId             Int\n  languageName     String\n  proficiencyLevel String?\n  position         Int?\n  createdAt        DateTime @default(now())\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n\nmodel Education {\n  id           Int       @id @default(autoincrement())\n  cvId         Int\n  school       String?\n  degree       String?\n  fieldOfStudy String?\n  startDate    DateTime?\n  endDate      DateTime?\n  description  String?\n  position     Int?\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n\n  cv CV @relation(fields: [cvId], references: [id])\n}\n",
   "inlineSchemaHash": "5676fc1b789a70f125b88c45212be593550dcc59c5316cc8f12cbc1719388b0b",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -311,3 +312,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "generated/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "generated/schema.prisma")

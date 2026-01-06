@@ -26,7 +26,20 @@ jest.mock('../app/services/prismaService', () => ({
 }));
 
 jest.mock('bcrypt');
-jest.mock('../app/services/jwtService');
+jest.mock('../app/services/jwtService', () => ({
+  generateToken: jest.fn(),
+  verifyToken: jest.fn(),
+  verifyTokenWithCache: jest.fn(),
+  invalidateToken: jest.fn(),
+}));
+jest.mock('../app/services/redisService', () => ({
+  redisService: {
+    get: jest.fn().mockResolvedValue(null),
+    set: jest.fn().mockResolvedValue(true),
+    del: jest.fn().mockResolvedValue(true),
+    isRedisAvailable: jest.fn().mockReturnValue(false),
+  },
+}));
 jest.mock('../app/utils/logger/logger', () => ({
   info: jest.fn(),
   error: jest.fn(),
@@ -130,18 +143,16 @@ describe('authService', () => {
   describe('verifyToken', () => {
     it('should verify a valid token', async () => {
       const mockDecoded = { userId: '123' };
-      mockedJwtService.verifyToken.mockReturnValue(mockDecoded);
+      mockedJwtService.verifyTokenWithCache.mockResolvedValue(mockDecoded);
 
       const result = await authService.verifyToken('valid.token');
 
       expect(result).toEqual({ userId: '123' });
-      expect(mockedJwtService.verifyToken).toHaveBeenCalledWith('valid.token');
+      expect(mockedJwtService.verifyTokenWithCache).toHaveBeenCalledWith('valid.token');
     });
 
     it('should throw TokenVerificationError when token is invalid', async () => {
-      mockedJwtService.verifyToken.mockImplementation(() => {
-        throw new Error('Invalid token');
-      });
+      mockedJwtService.verifyTokenWithCache.mockRejectedValue(new Error('Invalid token'));
 
       await expect(authService.verifyToken('invalid.token')).rejects.toThrow(
         TokenVerificationError
@@ -149,7 +160,7 @@ describe('authService', () => {
     });
 
     it('should throw TokenVerificationError when verifyToken returns null', async () => {
-      mockedJwtService.verifyToken.mockReturnValue(null as any);
+      mockedJwtService.verifyTokenWithCache.mockResolvedValue(null as any);
 
       await expect(authService.verifyToken('token')).rejects.toThrow(
         TokenVerificationError
@@ -157,11 +168,9 @@ describe('authService', () => {
     });
 
     it('should handle expired tokens', async () => {
-      mockedJwtService.verifyToken.mockImplementation(() => {
-        const error: any = new Error('jwt expired');
-        error.name = 'TokenExpiredError';
-        throw error;
-      });
+      const error: any = new Error('jwt expired');
+      error.name = 'TokenExpiredError';
+      mockedJwtService.verifyTokenWithCache.mockRejectedValue(error);
 
       await expect(authService.verifyToken('expired.token')).rejects.toThrow(
         TokenVerificationError

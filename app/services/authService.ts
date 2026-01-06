@@ -1,4 +1,4 @@
-import { generateToken, verifyToken } from './jwtService';
+import { generateToken, verifyToken, verifyTokenWithCache } from './jwtService';
 import prisma from './prismaService';
 import bcrypt from 'bcrypt';
 import logger from '../utils/logger/logger';
@@ -38,11 +38,11 @@ export const authService = {
 
   async verifyToken(token: string): Promise<{ userId: string }> {
     try {
-      const decodedToken = verifyToken(token);
+      const decodedToken = await verifyTokenWithCache(token);
       if (!decodedToken) {
         throw new TokenVerificationError({ token });
       }
-      logger.info({ token }, 'Token verified successfully');
+      logger.info({ token }, 'Token verified successfully via authService');
       return decodedToken;
     } catch (err) {
       throw new TokenVerificationError(err);
