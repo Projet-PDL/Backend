@@ -36,6 +36,6 @@ docker compose up -d --build
 ## Accessing the App
 Once the app is running, you can access it by sending a GET request to:
 
-http://localhost:3000/example/
+http://localhost:3000/docs/
 
 This will trigger the example route handler and return a response.
