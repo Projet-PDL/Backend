@@ -89,7 +89,6 @@ Le système **LinkedIn2CV** doit permettre à l’utilisateur de :
 | **Lan NGUYEN HONG** | Frontend Developer | UI/UX, développement de l’interface utilisateur avec Vue.js, intégration des composants et communication avec le backend. |
 | **Mamy MENDES** | Frontend Developer | UI/UX, développement de l’interface utilisateur avec Vue.js, intégration des composants et communication avec le backend. |
 | **Sofiane YEKENE** | Backend Developer | Développement des fonctionnalités backend (Fastify), gestion de l’API. |
-| **Noah TOMBEZE** | Backend Developer / QA – Testeur | Développement des fonctionnalités backend, rédaction et exécution des tests unitaires et fonctionnels backend. |
 | **Elisabeth GNIMASSOU** | Full Stack Developer | Développement des fonctionnalités backend, et intégration front-end/back-end.|
 
 ---
@@ -171,17 +170,29 @@ Le prototype illustre le parcours utilisateur complet :
 
 ## Documentation technique
 
-La documentation technique, incluant les diagrammes et schémas illustrant la structure et le fonctionnement du système, est disponible dans le fichier **DESIGN.md** dans le repo Frontend.
+La documentation technique, incluant les diagrammes et schémas illustrant la structure et le fonctionnement du système, est disponible dans le fichier [**DESIGN.md**](./DESIGN.md).
 
 > **Remarque :** Les instructions détaillées pour installer et lancer le projet sont disponibles dans chaque dépôt :
-- Frontend : `install.md` dans le repo frontend  
-- Backend : `install.md` dans le repo backend
+- Frontend : [install.md](./INSTALL.md) dans le repo frontend  
+- Backend : [install.md](https://github.com/Projet-PDL/Backend/blob/main/INSTALL.md) dans le repo backend
 
 
 ---
 
 ## Cahier de recette
 
-Le cahier de recette, détaillant les scénarios de test et les vérifications nécessaires pour valider les fonctionnalités du projet, est disponible dans le fichier **RECETTE.md** dans le repo Frontend.
+Le cahier de recette, détaillant les scénarios de test et les vérifications nécessaires pour valider les fonctionnalités du projet, est disponible dans le fichier [**RECETTE.md**](./RECETTE.md)..
+
+---
+
+## Guide utilisateur
+
+Ce guide présente les principales fonctionnalités du site web et explique les étapes essentielles pour son utilisation, afin de permettre une prise en main simple et rapide [**Guide**](Guide_Linkedin2CV.pdf).
+
+---
+
+## Présentation du projet
+
+Accéder à la présentation complète du projet : [**Présentation**](https://www.canva.com/design/DAG9d7UCd68/wuCjnwBZ-N7yYDyFf9Szgw/edit?utm_content=DAG9d7UCd68&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
 ---
