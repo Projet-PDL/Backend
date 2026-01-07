@@ -59,15 +59,21 @@ Le système **LinkedIn2CV** doit permettre à l’utilisateur de :
 
 | Composant | Technologie |
 |------------|--------------|
-| **Backend** | Fastify |
-| **Base de données** | PostgreSQL |
-| **Frontend** | VueJS + Bootstrap |
+| **Frontend** | Vue.js + Vite |
+| **Backend** | Fastify (Node.js) avec TypeScript |
+| **Base de données principale** | PostgreSQL + Prisma ORM |
+| **Base de données logs** | MongoDB (NoSQL) |
+| **Cache** | Redis |
+| **Stockage fichiers** | Firebase Storage |
+| **API externe** | LinkedIn API (scraping) |
 | **Génération PDF** | Puppeteer |
-| **Conteneurisation** | Docker / Docker Compose |
+| **Monitoring** | Atlas Charts |
+| **Conteneurisation** | Docker + Docker Compose |
+| **Infrastructure** | Azure VM (Ubuntu) |
 | **Contrôle de version** | GitHub |
-| **CI/CD** | GitHub Actions |
-| **Déploiement** | Google Cloud Platform |
-| **Tests** | Jest (test unitaires), swagger |
+| **CI/CD** | Jenkins |
+| **Déploiement Frontend** | Vercel |
+| **Tests** | Jest (unitaires et intégration) |
 
 ---
 
